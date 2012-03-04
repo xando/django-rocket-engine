@@ -7,11 +7,17 @@ Commands
 appengine
 _________
 
-Google App Engine comes with `appcfg.py <http://code.google.com/appengine/docs/python/tools/uploadinganapp.html>`_ to cover all functionality with handling deployment process. This command is right now wrapped by appengine django command and comes with some benefits of configuration hooks::
+Google       App       Engine        comes       with       `appcfg.py
+<http://code.google.com/appengine/docs/python/tools/uploadinganapp.html>`_
+to  cover all  functionality  with handling  deployment process.  This
+command is  right now  wrapped by appengine  django command  and comes
+with some benefits of configuration hooks::
 
     python manage.py appengine update
 
-Calling this command will send your code on remote App Engine instance. This option comes is support by two settings: PRE_UPDATE_COMMANDS nad POST_UPDATE_COMMANDS. see :doc:`../settings`.
+Calling  this  command  will  send  your code  on  remote  App  Engine
+instance.   This   option   comes   is  support   by   two   settings:
+PRE_UPDATE_COMMANDS nad POST_UPDATE_COMMANDS. see :doc:`../settings`.
 
 
 on_appengine
