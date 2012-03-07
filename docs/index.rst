@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Django on AppEngine's documentation!
-===============================================
+Welcome
+=======
 
-Welcome to Django on AppEngine documentation. 
+Welcome to Django on AppEngine documentation.
 
 Motivation  to create  this project  was  the fact  of publication  by
 Google CloudSQL backend.  This library as  it is is not for production
