@@ -18,6 +18,8 @@ from  `All  Buttons  Pressed <http://www.allbuttonspressed.com/>`_,  some ideas 
 `djangoappengine
 <http://www.allbuttonspressed.com/projects/djangoappengine>`_  project.
 
+Project is in experimental stage, source could could be found on `github
+<https://github.com/xando/django_appengine>`_.
 
 Contents
 --------
