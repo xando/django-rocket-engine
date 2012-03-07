@@ -14,9 +14,9 @@ ready yet,  the same as  Google AppEngine  CloudSQL is not  ready for
 production as well being currently in development preview.
 
 Project originaly inspired by work  of Waldemar Kornewald and Thomas Wanschik
-from  `All  Buttons  Pressed <http://www.allbuttonspressed.com/projects/djangoappengine>`_,  some ideas  where  moved  from
+from  `All  Buttons  Pressed <http://www.allbuttonspressed.com/>`_,  some ideas  where  moved  from
 `djangoappengine
-<http://code.google.com/appengine/docs/python/tools/uploadinganapp.html>`_  project.
+<http://www.allbuttonspressed.com/projects/djangoappengine>`_  project.
 
 
 Contents
