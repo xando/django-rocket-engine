@@ -10,33 +10,33 @@ django_appengine comes with pre-defined backend Google CloudSQL wrapper which av
     DATABASES = {
         'default': {
             'ENGINE': 'django_appengine.db.backends.cloudsql',
-            'INSTANCE': 'xando-1-main:django-gae',
-            'NAME': 'test',
+            'INSTANCE': 'instance:name',
+            'NAME': 'database_name',
         }
     }
 
 To distinguish between production and development library provides helper method which could applied in settings.py::
 
+    # settings.py
     from django_appengine import on_appengine
 
-    # ...
+    ...
 
     if on_appengine:
         DATABASES = {
             'default': {
                 'ENGINE': 'django_appengine.db.backends.cloudsql',
-                'INSTANCE': 'xando-1-main:django-gae',
-                'NAME': 'test',
-             }
+                'INSTANCE': 'instance:name',
+                'NAME': 'database_name',
+            }
         }
     else:
         DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': os.path.join(SITE_ROOT, 'development.db')
+                'NAME': 'development.db'
             }
         }
-
 
 PRE_UPDATE_COMMANDS
 -------------------
