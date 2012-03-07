@@ -3,30 +3,23 @@
 Installation
 ============
 
-First step most  obvious one is to create Django  project. There is no
-difference batten using Django with or without App Engine.
 
-Download      Google      AppEngine       SDK      `lates      version
-<http://code.google.com/appengine/downloads.html>`_.   Unzip and  make
-it visible on $PATH or  move SDK to .google_appengine directory inside
-your project.
+* Create new Django  project.
 
-Download latest  version of django_appengine Copy  django_appengine to
-you project directory.   Copy Django directory to  your local project.
-Google  App  Engine  doesn't  support any  sort  of  python  packaging
-mechanisms like pip,  easy_install you have to  maintain your packages
-in your project_directory or in libs/ directory inside your project.
+* Download `latest version <http://code.google.com/appengine/downloads.html>`_      of     Google AppEngine SDK, unzip it and make  it visible on $PATH or move unziped SDK to .google_appengine directory inside your project.
 
-`Register  <http://code.google.com/appengine/>`_  your application  at
-google app engine site.
+* Download  latest  version  of django_appengine  to  your  project directory.   This step  is required  becouse Google  AppEngine doesn't support  any  sort   of  python  packaging  mechanisms   like  pip  or easy_install.    You  have   to   maintain  your   packages  in   your project_directory.
 
-Create  a  CloudSQL  database   instance  using  `Google  Api  Console
-<https://code.google.com/apis/console>`_.  Don't  forget to  create  a
-database as well.
+* `Register  <http://code.google.com/appengine/>`_  your application  on Google AppEngine site.
 
-Google App  Engine requires from  application to has a  app.yaml, with
-basic description how to manage application after deployment. Copy and
-modify application-id into your app.yaml file::
+* Create  a  CloudSQL  database   instance  using  `Google  Api  Console <https://code.google.com/apis/console>`_, create a database inside your CloudSQL instance.
+
+Configuration
+-------------
+
+Google AppEngine requires from  applications to have a app.yaml, with
+basic description  how to manage application  after deployment. Create
+one an put yourapplication-id. Example app.yaml::
 
     application: your-application-id
     version: 1
@@ -39,8 +32,9 @@ modify application-id into your app.yaml file::
       script: django_appengine.wsgi
 
 
-Very list bit that  need to be done is to modify  your settings to use
-different databases durring development process and on production.::
+Very list  bit that  needs to  be done  is to  modify settings  to use
+different    databases   durring    development    process   and    on
+production. Inside settings.py::
 
     # settings.py
     from django_appengine import on_appengine
@@ -52,7 +46,7 @@ different databases durring development process and on production.::
             'default': {
                 'ENGINE': 'django_appengine.db.backends.cloudsql',
                 'INSTANCE': 'instance:name',
-                'NAME': 'database',
+                'NAME': 'database_name',
             }
         }
     else:
@@ -64,10 +58,10 @@ different databases durring development process and on production.::
         }
 
 Instead  of  using  sqlite3  backend   your  are  able  to  use  MySQL
-backend. This should be your  choice for seroius application, MySQL is
+backend. This should be your  choice for seroius application. MySQL is
 also  suggested by  Google as  a development  database for  AppEngine
 CloudSQL applications.
 
-This is just about it, application is ready for deploy.::
+This is just about it, application is ready for deploy::
    
     python manage.py appengine update

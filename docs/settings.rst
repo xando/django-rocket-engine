@@ -5,7 +5,7 @@ Settings
 DATABASES
 ---------
 
-django_appengine comes with pre-defined backend Google Cloud SQL wrapper which avoids of using your production data base during development::
+django_appengine comes with pre-defined backend Google CloudSQL wrapper which avoids of using your production data base during development::
 
     DATABASES = {
         'default': {
@@ -39,20 +39,33 @@ To distinguish between production and development library provides helper method
 
 
 PRE_UPDATE_COMMANDS
-___________________
+-------------------
 
-Sequence of commands that will be called before sending application to Google App Engine. Default PRE_UPDATE_COMMANDS = (). Example::
+Sequence of commands that will be called before sending application to Google AppEngine.
+
+Default::
+
+    PRE_UPDATE_COMMANDS = None
+
+Example::
 
     PRE_UPDATE_COMMANDS = (
         'collectstatic',
     )
 
 POST_UPDATE_COMMANDS
-____________________
+--------------------
 
-Sequence of commands that will be called after sending application to Google App Engine. Default POST_UPDATE_COMMANDS = (). Example::
+
+Sequence of commands that will be called after sending application to Google AppEngine.
+
+Default::
+
+    POST_UPDATE_COMMANDS = None
+
+Example::
 
     POST_UPDATE_COMMANDS = (
         ['on_appengine','syncdb'],
-    )   
+    )
 

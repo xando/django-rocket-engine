@@ -8,35 +8,24 @@ Welcome to Django on App Engine's documentation!
 
 Welcome to Django on App Engine documentation. 
 
-Motivation to  create this project  was fact of publication  by Google
-CloudSQL backend. This library is not for production ready the same as
-Google  App Engine  CloudSQL is  not  ready  for production  yet  being
-currently  in  development  preview.   This  library  doesn't  support
-django-nonrel. You are able still to  use BigTable models but not as a
-Django backend.
+Motivation  to create  this project  was  the fact  of publication  by
+Google CloudSQL backend.  This library as it is is  not for production
+ready yet,  the same as  Google App Engine  CloudSQL is not  ready for
+production  as well,  being  currently in  development preview. 
+
+Project originaly inspired by work  of Waldemar Kornewald and Thomas Wanschik
+from  `All  Buttons  Pressed <http://www.allbuttonspressed.com/projects/djangoappengine>`_,  some ideas  where  moved  from
+`djangoappengine
+<http://code.google.com/appengine/docs/python/tools/uploadinganapp.html>`_  project.
 
 
-Project  is  inspired  by work  of  Waldemar  Kornewald and Thomas
-Wanschik,  some  ideas  where   moved  from  original  djangoappengine
-project.
-
-
-Contents:
+Contents
+--------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    installation
    commands
    settings
-
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
