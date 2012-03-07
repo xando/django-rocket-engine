@@ -8,7 +8,7 @@ Installation
 
 * Download `latest version <http://code.google.com/appengine/downloads.html>`_      of     Google AppEngine SDK, unzip it and make  it visible on $PATH or move unziped SDK to .google_appengine directory inside your project.
 
-* Download  latest  version  of django_appengine  to  your  project directory.   This step  is required  becouse Google  AppEngine doesn't support  any  sort   of  python  packaging  mechanisms   like  pip  or easy_install.    You  have   to   maintain  your   packages  in   your project_directory.
+* Download  latest  version  of `django_appengine <https://github.com/xando/django_appengine/zipball/master>`_  to  your  project directory, rename directory to django_appengine.   This step  is required  becouse Google  AppEngine doesn't support  any  sort   of  python  packaging  mechanisms   like  pip  or easy_install.    You  have   to   maintain  your   packages  in   your project_directory.
 
 * `Register  <http://code.google.com/appengine/>`_  your application  on Google AppEngine site.
 
