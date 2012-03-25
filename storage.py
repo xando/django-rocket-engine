@@ -5,13 +5,10 @@ try:
 except ImportError:
     from StringIO import StringIO
 
-from django.conf import settings
-from django.core.files.base import File
+from django.core.files.base import File, ContentFile
 from django.core.files.storage import Storage
 from django.core.files.uploadedfile import UploadedFile
-from django.core.files.uploadhandler import FileUploadHandler, \
-    StopFutureHandlers
-from django.core.exceptions import ImproperlyConfigured
+from django.core.files.uploadhandler import FileUploadHandler, StopFutureHandlers
 from django.http import HttpResponse
 from django.utils.encoding import smart_str, force_unicode
 
@@ -167,3 +164,61 @@ class BlobstoreUploadedFile(UploadedFile):
 
     def multiple_chunks(self, chunk_size=1024*128):
         return True
+
+
+from google.appengine.api import files
+
+class CloudStorage(Storage):
+    def __init__(self, location=None, base_url=None):
+        bucket_name = 'django-rocket'
+        self.base_url = "//%s.commondatastorage.googleapis.com/" % bucket_name
+        self.location = '/gs/%s/' % bucket_name
+        # if location is None:
+        #     location = settings.APPENGINE_BUCKET
+        # self.location = '/gs/django-rocket/'
+        # self.location = os.path.abspath(location)
+        # "//:commondatastorage.googleapis.com/bucket/"
+        # self.base_url = base_url
+
+    def _open(self, name, mode='rb'):
+        file_data = []
+
+        with files.open('%s%s' % (self.location, name), 'r') as f:
+            data = f.read(1)
+            file_data.append(data)
+
+            while data != "":
+                data = f.read(1)
+                file_data.append(data)
+
+        return ContentFile(StringIO("".join(file_data)))
+
+    def save(self, name, content):
+        write_path = files.gs.create(
+            '%s%s' % (self.location, name),
+            mime_type='application/octet-stream',
+            acl='public-read'
+        )
+        with files.open(write_path, 'a') as fp:
+            fp.write(content.read())
+        files.finalize(write_path)
+        return name
+
+    def exists(self, name):
+        try:
+            files.open('%s%s' % (self.location, name), 'r')
+            return True
+        except files.ExistenceError:
+            return False
+
+    def size(self, name):
+        with files.open('%s%s' % (self.location, name), 'r') as f:
+            data = f.read(1)
+            while data != "":
+                data = f.read(1)
+            return f.tell()
+
+        return 0
+
+    def url(self, name):
+        return "%s%s" % (self.base_url, name)
