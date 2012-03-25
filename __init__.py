@@ -78,7 +78,10 @@ def path_appendine_sdk():
         # add SQLlite to allowed modules
         from google.appengine.tools import dev_appserver
         dev_appserver.HardenedModulesHook._WHITE_LIST_C_MODULES.extend(
-            ('parser', '_ssl', '_io', '_sqlite3'))
+            ('parser', '_ssl', '_io', '_sqlite3', 'os', '_os'))
+
+        dev_appserver.HardenedModulesHook._MODULE_OVERRIDES['os'] = os.__dict__
+        dev_appserver.HardenedModulesHook._PY27_ALLOWED_MODULES.append('os')
 
     else:
         # loogging exceptions hook
