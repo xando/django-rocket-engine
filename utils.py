@@ -1,10 +1,14 @@
-import os
 import imp
 import sys
+import logging
+
+from google.appengine.api import logservice
+from google.appengine.runtime import apiproxy_errors
+
+from django.utils.importlib import _resolve_name
 
 from . import PROJECT_DIR_NAME
 
-from django.utils.importlib import _resolve_name
 
 def _import_module(name, package=None):
     if name.startswith('.'):
@@ -42,7 +46,6 @@ class ImportHook(object):
 
 
 def log_traceback(*args, **kwargs):
-    import logging
     logging.exception('Exception in request:')
 
 
@@ -52,8 +55,6 @@ def validate_models():
     model valdidation here to ensure it is run every time the code
     changes.
     """
-
-    import logging
     from django.core.management.validation import get_validation_errors
     try:
         from cStringIO import StringIO
@@ -71,3 +72,10 @@ def validate_models():
         logging.critical("One or more models did not validate:\n%s" % error_text)
     else:
         logging.info("All models validated.")
+
+
+def flush_logs():
+  try:
+    logservice.flush()
+  except apiproxy_errors.CancelledError:
+    pass
