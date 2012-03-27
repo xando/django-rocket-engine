@@ -9,8 +9,14 @@ logger = logging.getLogger(__name__)
 
 class DefferedTask(object):
 
+    name = lambda self: self.__class__.__name__
+
     def __call__(self, cursor=None):
-        logger.debug("DefferedTask: %s, started." % self.__class__.__name__)
+        if cursor:
+            logger.debug("DefferedTask: %s, started at cursor %s."
+                         % (self.name, self.cursor))
+        else:
+            logger.debug("DefferedTask: %s, started." % self.name)
 
         utils.flush_logs()
 
@@ -20,6 +26,6 @@ class DefferedTask(object):
         except DeadlineExceededError:
             logger.debug(
                 "DefferedTask: %s, time limit hit at cursor %s .Restarting"
-                % (self.__class__.__name__, self.cursor)
+                % (self.name, self.cursor)
             )
             self.__call__(self.cursor)
