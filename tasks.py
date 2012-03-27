@@ -1,30 +1,25 @@
-# Based on
-# http://code.google.com/appengine/articles/deferred.html
-
-# * you can't reproduce time excded error on development env,
-
 import logging
-import os
 
 from google.appengine.runtime import DeadlineExceededError
-# from google.appengine.ext import deferred
 
+from . import utils
 
 logger = logging.getLogger(__name__)
 
+
 class DefferedTask(object):
 
-    cursor = None
-    retry_limit = 10
+    def __call__(self, cursor=None):
+        logger.debug("DefferedTask: %s, started." % self.__class__.__name__)
 
-    def __call__(self):
+        utils.flush_logs()
+
         try:
+            self.cursor = cursor
             self.job()
         except DeadlineExceededError:
-            logger.info("restarted ")
-            os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
-            self.__call__()
-
-
-def defer(task):
-    pass
+            logger.debug(
+                "DefferedTask: %s, time limit hit at cursor %s .Restarting"
+                % (self.__class__.__name__, self.cursor)
+            )
+            self.__call__(self.cursor)
