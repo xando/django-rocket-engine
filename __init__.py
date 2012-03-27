@@ -1,13 +1,12 @@
 import os
 import sys
 
-on_appengine_remote = os.getenv(
-    'SERVER_SOFTWARE', '').startswith('Google App Engine'
-)
+on_appengine_remote = os.getenv('SERVER_SOFTWARE','')\
+                        .startswith('Google App Engine')
 
 force_remote = False
 
-on_appengine = lambda : on_appengine_remote or force_remote
+on_appengine = (lambda : on_appengine_remote or force_remote)()
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
