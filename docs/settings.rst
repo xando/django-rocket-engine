@@ -38,6 +38,17 @@ To distinguish between production and development library provides helper method
             }
         }
 
+
+DEFAULT_FILE_STORAGE
+--------------------
+
+`Google   Cloud  Storage   <https://developers.google.com/storage/>`_
+file backend. To  enable   storage  go   to  `Google   Api  Console
+<https://code.google.com/apis/console>`_::
+
+    DEFAULT_FILE_STORAGE = 'django_appengine.storage.CloudStorage'
+
+
 APPENGINE_PRE_UPDATE_COMMANDS
 -----------------------------
 
@@ -69,3 +80,21 @@ Example::
         ['on_appengine','syncdb'],
     )
 
+
+APPENGINE_BUCKET
+----------------
+
+`Google   Cloud  Storage   <https://developers.google.com/storage/>`_
+bucket  name.    To  enable   storage  go   to  `Google   Api  Console
+<https://code.google.com/apis/console>`_.  Settings dedicated  to work
+with django_appengine.storage.CloudStorage
+See :doc:`../settings`.
+
+Default::
+
+    APPENGINE_BUCKET = None
+
+Example::
+
+    DEFAULT_FILE_STORAGE = 'django_appengine.storage.CloudStorage'
+    APPENGINE_BUCKET = 'my-bucket'
