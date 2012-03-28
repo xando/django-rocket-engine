@@ -8,8 +8,8 @@ from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
-PRE_UPDATE_COMMANDS = getattr(settings, 'PRE_UPDATE_COMMANDS', ())
-POST_UPDATE_COMMANDS = getattr(settings, 'POST_UPDATE_COMMANDS', ())
+PRE_UPDATE_COMMANDS = getattr(settings, 'APPENGINE_PRE_UPDATE_COMMANDS', ())
+POST_UPDATE_COMMANDS = getattr(settings, 'APPENGINE_POST_UPDATE_COMMANDS', ())
 
 class Command(BaseCommand):
     """Wrapper for appcfg.py with pre-update and post-update hooks"""

@@ -38,14 +38,14 @@ To distinguish between production and development library provides helper method
             }
         }
 
-PRE_UPDATE_COMMANDS
--------------------
+APPENGINE_PRE_UPDATE_COMMANDS
+-----------------------------
 
 Sequence of commands that will be called before sending application to Google AppEngine.
 
 Default::
 
-    PRE_UPDATE_COMMANDS = None
+    APPENGINE_PRE_UPDATE_COMMANDS = None
 
 Example::
 
@@ -53,15 +53,15 @@ Example::
         'collectstatic',
     )
 
-POST_UPDATE_COMMANDS
---------------------
+APPENGINE_POST_UPDATE_COMMANDS
+------------------------------
 
 
 Sequence of commands that will be called after sending application to Google AppEngine.
 
 Default::
 
-    POST_UPDATE_COMMANDS = None
+    APPENGINE_POST_UPDATE_COMMANDS = None
 
 Example::
 

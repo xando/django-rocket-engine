@@ -173,9 +173,9 @@ from google.appengine.api import files
 class CloudStorage(Storage):
     def __init__(self, location=None, base_url=None):
         try:
-            bucket_name = settings.ROCKET_BUCKET
+            bucket_name = settings.APPENGINE_BUCKET
         except AttributeError:
-            raise ImproperlyConfigured("ROCKET_BUCKET option not set in settings.py")
+            raise ImproperlyConfigured("APPENGINE_BUCKET option not set in settings.py")
 
         self.base_url = "//%s.commondatastorage.googleapis.com/" % bucket_name
         self.location = '/gs/%s/' % bucket_name

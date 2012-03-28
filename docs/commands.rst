@@ -17,7 +17,7 @@ with some benefits of configuration hooks::
 
 Calling  this  command  will  send  your code  on  remote  AppEngine
 instance.   This   option   comes   with  support   by   two   settings:
-PRE_UPDATE_COMMANDS nad POST_UPDATE_COMMANDS, see :doc:`../settings`.
+APPENGINE_PRE_UPDATE_COMMANDS nad APPENGINE_POST_UPDATE_COMMANDS, see :doc:`../settings`.
 
 
 on_appengine
