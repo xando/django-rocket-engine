@@ -8,7 +8,7 @@ Installation
 
 * Download `latest version <http://code.google.com/appengine/downloads.html>`_      of     Google AppEngine SDK, unzip it and make  it visible on $PATH or move unziped SDK to .google_appengine directory inside your project.
 
-* Download  latest  version  of `django_appengine <https://github.com/xando/django_appengine/zipball/master>`_  to  your  project directory, rename directory to django_appengine.   This step  is required  becouse Google  AppEngine doesn't support  any  sort   of  python  packaging  mechanisms   like  pip  or easy_install.    You  have   to   maintain  your   packages  in   your project_directory.
+* Download  latest  version  of `django_rocket <https://github.com/xando/django_rocket/zipball/master>`_  to  your  project directory, rename directory to django_rocket.   This step  is required  becouse Google  AppEngine doesn't support  any  sort   of  python  packaging  mechanisms   like  pip  or easy_install.    You  have   to   maintain  your   packages  in   your project_directory.
 
 * `Register  <http://code.google.com/appengine/>`_  your application  on Google AppEngine site.
 
@@ -29,7 +29,7 @@ one an put yourapplication-id. Example app.yaml::
 
     handlers:
     - url: /.*
-      script: django_appengine.wsgi
+      script: django_rocket.wsgi
 
 
 Very list  bit that  needs to  be done  is to  modify settings  to use
@@ -37,14 +37,14 @@ different    databases   durring    development    process   and    on
 production. Inside settings.py::
 
     # settings.py
-    from django_appengine import on_appengine
+    from django_rocket import on_appengine
 
     ...
 
     if on_appengine:
         DATABASES = {
             'default': {
-                'ENGINE': 'django_appengine.db.backends.cloudsql',
+                'ENGINE': 'django_rocket.db.backends.cloudsql',
                 'INSTANCE': 'instance:name',
                 'NAME': 'database_name',
             }

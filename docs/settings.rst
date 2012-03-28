@@ -5,11 +5,11 @@ Settings
 DATABASES
 ---------
 
-django_appengine comes with pre-defined backend Google CloudSQL wrapper which avoids of using your production data base during development::
+django_rocket comes with pre-defined backend Google CloudSQL wrapper which avoids of using your production data base during development::
 
     DATABASES = {
         'default': {
-            'ENGINE': 'django_appengine.db.backends.cloudsql',
+            'ENGINE': 'django_rocket.db.backends.cloudsql',
             'INSTANCE': 'instance:name',
             'NAME': 'database_name',
         }
@@ -18,14 +18,14 @@ django_appengine comes with pre-defined backend Google CloudSQL wrapper which av
 To distinguish between production and development library provides helper method which could applied in settings.py::
 
     # settings.py
-    from django_appengine import on_appengine
+    from django_rocket import on_appengine
 
     ...
 
     if on_appengine:
         DATABASES = {
             'default': {
-                'ENGINE': 'django_appengine.db.backends.cloudsql',
+                'ENGINE': 'django_rocket.db.backends.cloudsql',
                 'INSTANCE': 'instance:name',
                 'NAME': 'database_name',
             }
@@ -46,7 +46,7 @@ DEFAULT_FILE_STORAGE
 file backend. To  enable   storage  go   to  `Google   Api  Console
 <https://code.google.com/apis/console>`_::
 
-    DEFAULT_FILE_STORAGE = 'django_appengine.storage.CloudStorage'
+    DEFAULT_FILE_STORAGE = 'django_rocket.storage.CloudStorage'
 
 
 APPENGINE_PRE_UPDATE_COMMANDS
@@ -87,7 +87,7 @@ APPENGINE_BUCKET
 `Google   Cloud  Storage   <https://developers.google.com/storage/>`_
 bucket  name.    To  enable   storage  go   to  `Google   Api  Console
 <https://code.google.com/apis/console>`_.  Settings dedicated  to work
-with django_appengine.storage.CloudStorage
+with django_rocket.storage.CloudStorage
 See :doc:`../settings`.
 
 Default::
@@ -96,5 +96,5 @@ Default::
 
 Example::
 
-    DEFAULT_FILE_STORAGE = 'django_appengine.storage.CloudStorage'
+    DEFAULT_FILE_STORAGE = 'django_rocket.storage.CloudStorage'
     APPENGINE_BUCKET = 'my-bucket'

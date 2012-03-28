@@ -6,7 +6,7 @@
 Welcome
 =======
 
-Welcome to Django on AppEngine documentation.
+Welcome to Django Rocket, Django on AppEngine documentation.
 
 Motivation  to create  this project  was  the fact  of publication  by
 Google CloudSQL backend.  This library as  it is is not for production
@@ -19,7 +19,7 @@ from  `All  Buttons  Pressed <http://www.allbuttonspressed.com/>`_,  some ideas 
 <http://www.allbuttonspressed.com/projects/djangoappengine>`_  project.
 
 Project is in experimental stage, source could could be found on `github
-<https://github.com/xando/django_appengine>`_.
+<https://github.com/xando/django_rocket>`_.
 
 Contents
 --------
