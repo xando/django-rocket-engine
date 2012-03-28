@@ -11,6 +11,8 @@ from django.core.files.uploadedfile import UploadedFile
 from django.core.files.uploadhandler import FileUploadHandler, StopFutureHandlers
 from django.http import HttpResponse
 from django.utils.encoding import smart_str, force_unicode
+from django.core.exceptions import ImproperlyConfigured
+from django.conf import settings
 
 from google.appengine.ext.blobstore import BlobInfo, BlobKey, delete, \
     create_upload_url, BLOB_KEY_HEADER, BLOB_RANGE_HEADER, BlobReader
@@ -170,15 +172,13 @@ from google.appengine.api import files
 
 class CloudStorage(Storage):
     def __init__(self, location=None, base_url=None):
-        bucket_name = 'django-rocket'
+        try:
+            bucket_name = settings.ROCKET_BUCKET
+        except AttributeError:
+            raise ImproperlyConfigured("ROCKET_BUCKET option not set in settings.py")
+
         self.base_url = "//%s.commondatastorage.googleapis.com/" % bucket_name
         self.location = '/gs/%s/' % bucket_name
-        # if location is None:
-        #     location = settings.APPENGINE_BUCKET
-        # self.location = '/gs/django-rocket/'
-        # self.location = os.path.abspath(location)
-        # "//:commondatastorage.googleapis.com/bucket/"
-        # self.base_url = base_url
 
     def _open(self, name, mode='rb'):
         file_data = []
