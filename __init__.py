@@ -4,9 +4,7 @@ import sys
 on_appengine_remote = os.getenv('SERVER_SOFTWARE','')\
                         .startswith('Google App Engine')
 
-force_remote = False
-
-on_appengine = (lambda : on_appengine_remote or force_remote)()
+on_appengine = on_appengine_remote
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -66,8 +64,6 @@ def path_appendine_sdk():
     from django.utils import importlib
     importlib.import_module = _import_module
 
-    # settings file fix
-    os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
 
     #custom DjangoProject import Hook
     from .utils import ImportHook
@@ -87,6 +83,10 @@ def path_appendine_sdk():
         from django.core import signals
         from .utils import log_traceback
         signals.got_request_exception.connect(log_traceback)
+
+        # settings file fix
+        os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
+
 
 
 if not on_appengine_remote:
