@@ -5,11 +5,16 @@ from ... import PROJECT_DIR, PROJECT_DIR_NAME
 from google.appengine.tools import appcfg
 
 from django.conf import settings
-from django.core.management import call_command
+from django.core.management import execute_from_command_line
 from django.core.management.base import BaseCommand
+from django.core.urlresolvers import get_callable
 
-PRE_UPDATE_COMMANDS = getattr(settings, 'APPENGINE_PRE_UPDATE_COMMANDS', ())
-POST_UPDATE_COMMANDS = getattr(settings, 'APPENGINE_POST_UPDATE_COMMANDS', ())
+
+PRE_UPDATE_HOOK = getattr(settings, 'APPENGINE_PRE_UPDATE',
+                              'appengine_hooks.pre_update')
+
+POST_UPDATE_HOOK = getattr(settings, 'APPENGINE_POST_UPDATE',
+                               'appengine_hooks.post_update')
 
 class Command(BaseCommand):
     """Wrapper for appcfg.py with pre-update and post-update hooks"""
@@ -18,10 +23,12 @@ class Command(BaseCommand):
     args = '[any options that normally would be applied to appcfg.py]'
 
     def call_command(self, command):
+
         if isinstance(command, basestring):
-            call_command(command)
+            import ipdb; ipdb.set_trace()
+            execute_from_command_line(command.split(" "))
         if isinstance(command, tuple) or isinstance(command, list):
-            call_command(*command)
+            execute_from_command_line(command)
 
     def run_from_argv(self, argv):
         if len(argv) > 2 and argv[2] == 'update':
@@ -30,13 +37,17 @@ class Command(BaseCommand):
             hook_module.write("PROJECT_DIR_NAME='%s'\n" % PROJECT_DIR_NAME)
             hook_module.close()
 
-            for command in PRE_UPDATE_COMMANDS:
-                self.call_command(command)
+            try:
+                get_callable(PRE_UPDATE_HOOK)()
+            except (AttributeError, ImportError):
+                pass
 
             appcfg.main(argv[1:] + [PROJECT_DIR])
 
-            for command in POST_UPDATE_COMMANDS:
-                self.call_command(command)
+            try:
+                get_callable(POST_UPDATE_HOOK)()
+            except (AttributeError, ImportError):
+                pass
 
             os.remove(file_path)
         else:

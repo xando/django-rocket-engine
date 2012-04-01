@@ -5,7 +5,7 @@ Settings
 DATABASES
 ---------
 
-django_rocket comes with pre-defined backend Google CloudSQL wrapper which avoids of using your production data base during development::
+django_rocket comes with pre-defined backend Google CloudSQL wrapper which prevents of using your production database during development::
 
     DATABASES = {
         'default': {
@@ -15,7 +15,7 @@ django_rocket comes with pre-defined backend Google CloudSQL wrapper which avoid
         }
     }
 
-To distinguish between production and development library provides helper method which could applied in settings.py::
+To distinguish between production and development, library provides helper method which could applied in settings.py::
 
     # settings.py
     from django_rocket import on_appengine
@@ -48,47 +48,13 @@ file backend. To  enable   storage  go   to  `Google   Api  Console
 
     DEFAULT_FILE_STORAGE = 'django_rocket.storage.CloudStorage'
 
-
-APPENGINE_PRE_UPDATE_COMMANDS
------------------------------
-
-Sequence of commands that will be called before sending application to Google AppEngine.
-
-Default::
-
-    APPENGINE_PRE_UPDATE_COMMANDS = None
-
-Example::
-
-    PRE_UPDATE_COMMANDS = (
-        'collectstatic',
-    )
-
-APPENGINE_POST_UPDATE_COMMANDS
-------------------------------
-
-
-Sequence of commands that will be called after sending application to Google AppEngine.
-
-Default::
-
-    APPENGINE_POST_UPDATE_COMMANDS = None
-
-Example::
-
-    POST_UPDATE_COMMANDS = (
-        ['on_appengine','syncdb'],
-    )
-
-
 APPENGINE_BUCKET
 ----------------
 
 `Google   Cloud  Storage   <https://developers.google.com/storage/>`_
 bucket  name.    To  enable   storage  go   to  `Google   Api  Console
 <https://code.google.com/apis/console>`_.  Settings dedicated  to work
-with django_rocket.storage.CloudStorage
-See :doc:`../settings`.
+with 'django_rocket.storage.CloudStorage' as a DEFAULT_FILE_STORAGE.
 
 Default::
 
@@ -98,3 +64,36 @@ Example::
 
     DEFAULT_FILE_STORAGE = 'django_rocket.storage.CloudStorage'
     APPENGINE_BUCKET = 'my-bucket'
+
+
+APPENGINE_PRE_UPDATE
+--------------------
+
+Callable that will be applied before sending application to Google AppEngine.
+
+Default::
+
+    APPENGINE_PRE_UPDATE = 'appengine_hooks.pre_update'
+
+APPENGINE_POST_UPDATE
+---------------------
+
+Callable that will be applied after sending application to Google AppEngine.
+
+Default::
+
+    APPENGINE_POST_UPDATE = 'appengine_hooks.post_update'
+
+Example appengine_hooks.py::
+
+    from django.core.management import call_command
+
+    def pre_update():
+        call_command('collectstatic')
+
+    def post_update():
+        call_command('on_appengine', 'syncdb')
+
+        # If south is being used
+       	call_command('on_appengine', 'migrate')
+
