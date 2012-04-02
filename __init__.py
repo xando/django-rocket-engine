@@ -84,9 +84,9 @@ def path_appendine_sdk():
         signals.got_request_exception.connect(log_traceback)
 
 
-# settings file fix
-# if not os.environ.get('DJANGO_SETTINGS_MODULE'):
-os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
+    # settings file fix
+    if not os.environ.get('DJANGO_SETTINGS_MODULE'):
+        os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
 
 
 if not on_appengine_remote:
