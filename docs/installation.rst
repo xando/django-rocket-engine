@@ -66,8 +66,11 @@ _____________
 
 Google AppEngine requires from  applications to have a app.yaml, with
 basic description  how to manage application  after deployment. Create
-one an put yourapplication-id. Example app.yaml::
+one an put yourapplication-id. Example app.yaml:
 
+.. code-block:: yaml
+
+    # app.yaml
     application: your-application-id
     version: 1
     runtime: python27
@@ -79,9 +82,21 @@ one an put yourapplication-id. Example app.yaml::
       script: django_rocket.wsgi
 
 
+django_rocket as every Django application needs to be added to settings.py file in INSTALLED_APPS section:
+
+.. code-block:: python
+
+    # settings.py
+    INSTALLED_APPS = (
+        ...
+        'django_rocket',
+    )
+
 Very list  bit that  needs to  be done  is to  modify settings  to use
 different    databases   durring    development    process   and    on
-production. Inside settings.py::
+production. Inside settings.py:
+
+.. code-block:: python
 
     # settings.py
     from django_rocket import on_appengine
@@ -111,7 +126,10 @@ backend.   This    should   be   also   your    choice   for   seroius
 application.  MySQL  is also  suggested  by  Google as  a  development
 database for AppEngine CloudSQL applications.
 
-This is just about it, application is ready for deploy::
+This is just about it, application is ready for deploy:
+
+
+.. code-block:: bash
    
     $ python manage.py appengine update
 
