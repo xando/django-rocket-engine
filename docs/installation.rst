@@ -43,10 +43,9 @@ Download        latest         version        of        `django_rocket
 project directory, rename directory to  django_rocket, 
 
 or go into your
-new  project  directory   and  past  this  code  in   to  your  python
-interpreter::
+new  project  directory   and  past  this  code  in   to  your shell::
 
-     >>> import urllib,zipfile,os; urllib.urlretrieve("https://github.com/xando/django_rocket/zipball/master", "django_rocket.zip"); zipfile.ZipFile('django_rocket.zip', 'r').extractall(); os.rename(zipfile.ZipFile('django_rocket.zip', 'r').namelist()[0].strip('/'), 'django_rocket'); os.remove('django_rocket.zip')
+     $ python -c "import urllib,zipfile,os; urllib.urlretrieve('https://github.com/xando/django_rocket/zipball/master', 'django_rocket.zip'); zipfile.ZipFile('django_rocket.zip', 'r').extractall(); os.rename(zipfile.ZipFile('django_rocket.zip', 'r').namelist()[0].strip('/'), 'django_rocket'); os.remove('django_rocket.zip')"
 
 
 Create CloudSQL database

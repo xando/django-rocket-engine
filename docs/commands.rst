@@ -15,9 +15,9 @@ with some benefits of configuration hooks::
 
     python manage.py appengine update
 
-Calling  this  command  will  send  your code  on  remote  AppEngine
-instance.   This   option   comes   with  support   by   two   settings:
-APPENGINE_PRE_UPDATE_COMMANDS nad APPENGINE_POST_UPDATE_COMMANDS, see :doc:`../settings`.
+Calling this command will send your code on remote AppEngine instance.
+This  option comes  with  support of  pre and  post  update hooks  see
+:doc:`../settings`.
 
 
 on_appengine
