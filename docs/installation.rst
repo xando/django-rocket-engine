@@ -9,6 +9,11 @@ ____________________________________
 
 Get the latest version of SDK from `<http://code.google.com/appengine/downloads.html>`_, unzip it and make it visiable in $PATH variable. 
 
+If you don't know how to add path to $PATH, check your link: 
+`linux <http://www.troubleshooters.com/linux/prepostpath.htm>`_, 
+`mac os <http://keito.me/tutorials/macosx_path>`_,
+`windows <http://www.computerhope.com/issues/ch000549.htm>`_.
+
 Install Django
 ______________
 
