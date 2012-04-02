@@ -18,7 +18,6 @@ else:
 
 def get_appengine_sdk_path():
     typical_sdk_paths = [
-        os.path.join(PROJECT_DIR, '.google_appengine'),
         os.environ.get('APP_ENGINE_SDK',""),
     ] + os.environ.get('PATH', '').split(os.pathsep)
 
