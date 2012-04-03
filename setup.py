@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-
 import os
 from setuptools import setup, find_packages
 
-readme = 'README.rst'
-
 description = 'Google AppEngine helper applcaiton'
-long_description = open(readme).read() if os.path.exists(readme) else ""
+long_description = open('README.rst').read() if os.path.exists('README.rst') else ""
 
+version = open('VERSION').read() if os.path.exists('VERSION') else ""
 
 setup(name='django_rocket',
       version='0.0.3',
