@@ -8,8 +8,7 @@ production as well being currently in development preview.
 
 Project originaly inspired by work  of Waldemar Kornewald and Thomas Wanschik
 from  `All  Buttons  Pressed <http://www.allbuttonspressed.com/projects/djangoappengine>`_,  some ideas  where  moved  from
-`djangoappengine
-<http://code.google.com/appengine/docs/python/tools/uploadinganapp.html>`_  project.
+`djangoappengine <http://www.allbuttonspressed.com/projects/djangoappengine>`_  project.
 
 Documentation:
 ______________
