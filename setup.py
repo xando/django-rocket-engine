@@ -10,7 +10,7 @@ long_description = open(readme).read() if os.path.exists(readme) else ""
 
 
 setup(name='django_rocket',
-      version='0.0.2',
+      version='0.0.3',
       package_dir={'django_rocket': '.'},
       packages=['django_rocket'] + ['django_rocket.%s' % name for name in find_packages()],
       author='Sebastian Pawluś',
