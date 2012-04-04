@@ -21,8 +21,8 @@ class Command(BaseCommand):
     help = 'Calls appcfg.py for the current project.'
     args = '[any options that normally would be applied to appcfg.py]'
 
-    def run_from_argv(self, argv):
-        if len(argv) > 2 and argv[2] == 'update':
+    def update(self, argv):
+        try:
             file_path = os.path.join(PROJECT_DIR,"_gae_module_name.py")
             hook_module = open(file_path, "w+")
             hook_module.write("PROJECT_DIR_NAME='%s'\n" % PROJECT_DIR_NAME)
@@ -40,6 +40,13 @@ class Command(BaseCommand):
             except (AttributeError, ImportError):
                 pass
 
+        except:
+            pass
+        finally:
             os.remove(file_path)
+
+    def run_from_argv(self, argv):
+        if len(argv) > 2 and argv[2] == 'update':
+            self.update(argv)
         else:
             appcfg.main(argv[1:] + [PROJECT_DIR])
