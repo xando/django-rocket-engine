@@ -160,7 +160,6 @@ class Command(BaseCommand):
         shutil.move(self.appengine_lib_python, self.appengine_deployed_libs)
 
     def clean_upload(self):
-        return
         shutil.rmtree(self.appengine_deployed_libs)
 
     def update(self, argv):
