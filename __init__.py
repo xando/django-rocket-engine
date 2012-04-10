@@ -87,10 +87,7 @@ def path_appendine_sdk():
         import site
         site.addsitedir(os.path.join(PROJECT_DIR, 'deployed_libs'))
 
-    # settings file fix
-    if not os.environ.get('DJANGO_SETTINGS_MODULE'):
-        os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
-
+os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
 
 if not on_appengine_remote:
     setup_appendine_sdk()
