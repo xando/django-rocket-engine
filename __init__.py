@@ -76,6 +76,7 @@ def path_appendine_sdk():
 
         dev_appserver.HardenedModulesHook._MODULE_OVERRIDES['os'] = os.__dict__
         dev_appserver.HardenedModulesHook._PY27_ALLOWED_MODULES.append('os')
+        dev_appserver.FakeFile.NOT_ALLOWED_DIRS = set([])
 
     else:
         # loogging exceptions hook
@@ -83,6 +84,8 @@ def path_appendine_sdk():
         from .utils import log_traceback
         signals.got_request_exception.connect(log_traceback)
 
+        import site
+        site.addsitedir(os.path.join(PROJECT_DIR, 'deployed_libs'))
 
     # settings file fix
     if not os.environ.get('DJANGO_SETTINGS_MODULE'):
