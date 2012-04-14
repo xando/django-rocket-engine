@@ -16,6 +16,7 @@ setup(name='django_rocket',
       description=description,
       long_description=long_description,
       install_requires=[
+          'distribute',
           'virtualenv>=1.7.1.2',
       ],
       include_package_data=True,
