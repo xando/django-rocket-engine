@@ -65,14 +65,13 @@ class Command(BaseCommand):
                     appengine_requirements_content
                 )
 
-
-            appengine_requirements_editable_content = "".join(
-                [line for line in file_content if editable(line)]
-            )
-            if appengine_requirements_editable_content:
-                open(appengine_requirements_editable, 'w').write(
-                    appengine_requirements_editable_content
-                )
+           # appengine_requirements_editable_content = "".join(
+            #     [line for line in file_content if editable(line)]
+            # )
+            # if appengine_requirements_editable_content:
+            #     open(appengine_requirements_editable, 'w').write(
+            #         appengine_requirements_editable_content
+            #     )
 
         if not os.path.exists(appengine_libs):
             os.mkdir(appengine_libs)
@@ -94,22 +93,26 @@ class Command(BaseCommand):
 
             os.remove(appengine_requirements)
 
-        if os.path.exists(appengine_requirements_editable):
-            subprocess.Popen(
-                shlex.split(
-                    "%s install --requirement=%s --download-cache=%s"
-                    % (pip_command, appengine_requirements_editable,
-                       virtualenv_cache)
-                ),
-            ).wait()
+        # if os.path.exists(appengine_requirements_editable):
+        #     subprocess.Popen(
+        #         shlex.split(
+        #             "%s install --requirement=%s --download-cache=%s -d %s"
+        #             % (pip_command, appengine_requirements_editable,
+        #                virtualenv_cache, appengine_libs)
+        #         ),
+        #     ).wait()
 
-            for package in os.listdir(virtualenv_appengine_src):
-                shutil.move(
-                    os.path.join(virtualenv_appengine_src, package),
-                    os.path.join(appengine_libs, package)
-                )
+            # for package in os.listdir(virtualenv_appengine_src):
+            #     shutil.move(
+            #         os.path.join(virtualenv_appengine_src, package),
+            #         os.path.join(appengine_libs, package)
+            #     )
 
-            os.remove(appengine_requirements_editable)
+            # os.remove(appengine_requirements_editable)
+
+        # subprocess.Popen(
+        #     shlex.split('virtualenv %s --relocatable' % virtualenv),
+        # ).wait()
 
     def prepare_upload(self):
         requirements_file = os.path.join(
@@ -135,10 +138,10 @@ class Command(BaseCommand):
 
     def update(self, argv):
         self.clean_upload()
+        self.prepare_upload()
 
+        return
         try:
-            self.prepare_upload()
-
             file_path = os.path.join(PROJECT_DIR,"_gae_module_name.py")
             hook_module = open(file_path, "w+")
             hook_module.write("PROJECT_DIR_NAME='%s'\n" % PROJECT_DIR_NAME)
