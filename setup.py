@@ -9,13 +9,15 @@ version = open('VERSION').read() if os.path.exists('VERSION') else ""
 
 setup(name='django_rocket',
       version=version,
-      package_dir={'django_rocket': '.'},
-      packages=['django_rocket'] + ['django_rocket.%s' % name for name in find_packages()],
+      packages=find_packages(),
       author='Sebastian Pawluś',
       author_email='sebastian.pawlus@gmail.com',
-      url='http://readthedocs.org/docs/django_rocket/',
+      url='http://readthedocs.org/docs/django-rocket/',
       description=description,
       long_description=long_description,
+      install_requires=[
+          'virtualenv>=1.7.1.2',
+      ],
       include_package_data=True,
       platforms=['any'],
       classifiers=[

@@ -6,7 +6,8 @@ on_appengine_remote = os.getenv('SERVER_SOFTWARE','')\
 
 on_appengine = on_appengine_remote
 
-PROJECT_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+import manage
+PROJECT_DIR = os.path.abspath(os.path.dirname(manage.__file__))
 
 
 if on_appengine_remote:
@@ -85,7 +86,7 @@ def path_appendine_sdk():
         signals.got_request_exception.connect(log_traceback)
 
         import site
-        site.addsitedir(os.path.join(PROJECT_DIR, 'deployed_libs'))
+        site.addsitedir(os.path.join(PROJECT_DIR, 'appengine_libs'))
 
 os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
 
