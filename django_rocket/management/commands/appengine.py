@@ -84,9 +84,10 @@ class Command(BaseCommand):
 
     def update(self, argv):
         self.clean_upload()
-        self.prepare_upload()
-        return
+
         try:
+            self.prepare_upload()
+
             file_path = os.path.join(PROJECT_DIR,"_gae_module_name.py")
             hook_module = open(file_path, "w+")
             hook_module.write("PROJECT_DIR_NAME='%s'\n" % PROJECT_DIR_NAME)
