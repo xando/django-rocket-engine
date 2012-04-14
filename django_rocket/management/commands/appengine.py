@@ -40,17 +40,12 @@ class Command(BaseCommand):
         virtualenv_cache = os.path.join(virtualenv, 'cache')
         virtualenv_appengine_libs = os.path.join(virtualenv, 'appengine_libs')
 
-        appengine_libs = os.path.join(PROJECT_DIR, 'appengine_libs')
-
         pip_command = os.path.join(virtualenv, 'bin', 'pip')
 
         if not os.path.exists(virtualenv):
             subprocess.Popen(
                 shlex.split('virtualenv %s --distribute' % virtualenv),
             ).wait()
-
-        if not os.path.exists(appengine_libs):
-            os.mkdir(appengine_libs)
 
         subprocess.Popen(
             shlex.split(
@@ -62,7 +57,7 @@ class Command(BaseCommand):
 
         shutil.move(
             virtualenv_appengine_libs,
-            appengine_libs
+            PROJECT_DIR
         )
 
     def prepare_upload(self):
@@ -89,9 +84,9 @@ class Command(BaseCommand):
 
     def update(self, argv):
         self.clean_upload()
-
+        self.prepare_upload()
+        return
         try:
-            self.prepare_upload()
             file_path = os.path.join(PROJECT_DIR,"_gae_module_name.py")
             hook_module = open(file_path, "w+")
             hook_module.write("PROJECT_DIR_NAME='%s'\n" % PROJECT_DIR_NAME)
