@@ -79,12 +79,6 @@ def path_appendine_sdk():
         dev_appserver.HardenedModulesHook._PY27_ALLOWED_MODULES.append('os')
 
         dev_appserver.FakeFile.NOT_ALLOWED_DIRS = set([])
-        dev_appserver.FakeFile.ALLOWED_DIRS.update([
-            os.path.abspath(
-                os.path.join(os.path.dirname(os.__file__), '../../', 'src')
-            )
-        ])
-
 
     else:
         # loogging exceptions hook
