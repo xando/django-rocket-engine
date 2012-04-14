@@ -20,6 +20,8 @@ else:
 def get_appengine_sdk_path():
     typical_sdk_paths = [
         os.environ.get('APP_ENGINE_SDK',""),
+        '/usr/local/google_appengine',
+        '/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine'
     ] + os.environ.get('PATH', '').split(os.pathsep)
 
     # List of files which will be used as a test for SQK lookup.
