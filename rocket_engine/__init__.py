@@ -1,12 +1,15 @@
 import os
 import sys
 
+import django
+import manage
+
+
 on_appengine_remote = os.getenv('SERVER_SOFTWARE','')\
                         .startswith('Google App Engine')
 
 on_appengine = on_appengine_remote
 
-import manage
 PROJECT_DIR = os.path.abspath(os.path.dirname(manage.__file__))
 
 
@@ -66,6 +69,7 @@ def path_appendine_sdk():
 
         dev_appserver.HardenedModulesHook._MODULE_OVERRIDES['os'] = os.__dict__
         dev_appserver.HardenedModulesHook._PY27_ALLOWED_MODULES.append('os')
+        dev_appserver.HardenedModulesHook._HardenedModulesHook__PY27_OPTIONAL_ALLOWED_MODULES = {}
 
         dev_appserver.FakeFile.NOT_ALLOWED_DIRS = set([])
 
@@ -84,6 +88,14 @@ if not on_appengine_remote:
     setup_appendine_sdk()
 path_appendine_sdk()
 
-from django.core.handlers.wsgi import WSGIHandler
 
-wsgi = WSGIHandler()
+version = django.get_version().split('.')
+
+if version[1] == '3':
+    from django.core.handlers.wsgi import WSGIHandler
+    wsgi = WSGIHandler()
+
+elif version[1] == '4':
+    from django.core import wsgi as django_wsgi
+    wsgi = django_wsgi.get_wsgi_application()
+
