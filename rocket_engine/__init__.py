@@ -10,13 +10,6 @@ import manage
 PROJECT_DIR = os.path.abspath(os.path.dirname(manage.__file__))
 
 
-if on_appengine_remote:
-    import _gae_module_name
-    PROJECT_DIR_NAME = _gae_module_name.PROJECT_DIR_NAME
-else:
-    PROJECT_DIR_NAME = os.path.basename(PROJECT_DIR)
-
-
 def get_appengine_sdk_path():
     typical_sdk_paths = [
         os.environ.get('APP_ENGINE_SDK',""),
@@ -61,15 +54,9 @@ def setup_appendine_sdk():
 
 def path_appendine_sdk():
 
-    # import fixes
-    from .utils import _import_module
-    from django.utils import importlib
-    importlib.import_module = _import_module
-
-
-    #custom DjangoProject import Hook
-    from .utils import ImportHook
-    sys.meta_path.insert(0, ImportHook())
+    # TODO custom DjangoProject import Hook
+    # from .utils import ImportHook
+    # sys.meta_path.insert(0, ImportHook())
 
     if not on_appengine_remote:
         # add SQLlite to allowed modules

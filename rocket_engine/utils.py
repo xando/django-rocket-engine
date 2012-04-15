@@ -1,48 +1,19 @@
-import imp
-import sys
 import logging
 
 from google.appengine.api import logservice
 from google.appengine.runtime import apiproxy_errors
 
-from django.utils.importlib import _resolve_name
-
-from . import PROJECT_DIR_NAME
-
-
-def _import_module(name, package=None):
-    if name.startswith('.'):
-        if not package:
-            raise TypeError("relative imports require the 'package' argument")
-        level = 0
-        for character in name:
-            if character != '.':
-                break
-            level += 1
-        name = _resolve_name(name[level:], package, level)
-
-    name = name.replace("%s." % PROJECT_DIR_NAME, "")
-
-    __import__(name)
-    return sys.modules[name]
+from django.utils.importlib import import_module
 
 
 class ImportHook(object):
+
     def find_module(self, fullname, path=None):
-        if fullname.startswith(PROJECT_DIR_NAME):
+        if fullname.startswith('ipdb'): #TODO
             return self
 
     def load_module(self, fullname):
-        """See PEP 302."""
-        if fullname == PROJECT_DIR_NAME:
-            module = imp.new_module(fullname)
-            module.__file__ = "fake:" + fullname
-            module.__path__ = []
-            module.__loader__ = self
-            sys.modules.setdefault(fullname, module)
-            return module
-        else:
-            return _import_module(fullname)
+        return import_module(fullname)
 
 
 def log_traceback(*args, **kwargs):

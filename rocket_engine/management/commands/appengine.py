@@ -10,7 +10,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.core.urlresolvers import get_callable
 
-from ... import PROJECT_DIR, PROJECT_DIR_NAME
+from ... import PROJECT_DIR
 
 
 logger = logging.getLogger(__name__)
@@ -88,11 +88,6 @@ class Command(BaseCommand):
         try:
             self.prepare_upload()
 
-            file_path = os.path.join(PROJECT_DIR,"_gae_module_name.py")
-            hook_module = open(file_path, "w+")
-            hook_module.write("PROJECT_DIR_NAME='%s'\n" % PROJECT_DIR_NAME)
-            hook_module.close()
-
             try:
                 get_callable(PRE_UPDATE_HOOK)()
             except (AttributeError, ImportError):
@@ -106,7 +101,6 @@ class Command(BaseCommand):
                 pass
 
         finally:
-            os.remove(file_path)
             self.clean_upload()
 
     def run_from_argv(self, argv):
