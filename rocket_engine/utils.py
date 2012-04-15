@@ -1,10 +1,11 @@
+import os
 import logging
 
 from google.appengine.api import logservice
 from google.appengine.runtime import apiproxy_errors
 
 from django.utils.importlib import import_module
-
+from django.core.exceptions import ImproperlyConfigured
 
 class ImportHook(object):
 
@@ -50,3 +51,13 @@ def flush_logs():
     logservice.flush()
   except apiproxy_errors.CancelledError:
     pass
+
+
+def locate_settings(project_dir):
+    for path, dirs, files in os.walk(project_dir):
+        if 'settings.py' in files:
+            return "%s.settings" % os.path.basename(path.strip('./\\'))
+
+    raise ImproperlyConfigured(
+        "Could not find 'settings' module. Make sure that project contains settings.py file or 'DJANGO_SETTINGS_MODULE' is set.")
+

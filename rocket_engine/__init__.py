@@ -10,6 +10,7 @@ on_appengine_remote = os.getenv('SERVER_SOFTWARE','')\
 
 on_appengine = on_appengine_remote
 
+
 PROJECT_DIR = os.path.abspath(os.path.dirname(manage.__file__))
 
 
@@ -61,6 +62,10 @@ def path_appendine_sdk():
     # from .utils import ImportHook
     # sys.meta_path.insert(0, ImportHook())
 
+    from .utils import locate_settings
+    if not os.environ.get('DJANGO_SETTINGS_MODULE', None):
+        os.environ.update({'DJANGO_SETTINGS_MODULE': locate_settings(PROJECT_DIR)})
+
     if not on_appengine_remote:
         # add SQLlite to allowed modules
         from google.appengine.tools import dev_appserver
@@ -82,7 +87,6 @@ def path_appendine_sdk():
         import site
         site.addsitedir(os.path.join(PROJECT_DIR, 'appengine_libs'))
 
-os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
 
 if not on_appengine_remote:
     setup_appendine_sdk()
