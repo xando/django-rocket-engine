@@ -92,7 +92,7 @@ django-rocket-engine as every Django application needs to be added to settings.p
     # settings.py
     INSTALLED_APPS = (
         ...
-        'rocket-engine',
+        'rocket_engine',
     )
 
 Very list  bit that  needs to  be done  is to  modify settings  to use
