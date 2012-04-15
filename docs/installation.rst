@@ -37,15 +37,15 @@ you may achieve this using django-admin internal tool:
     $ django-admin startproject my_awesome_project
 
 
-Install django_rocket
-______________________
+Install django-rocket-engine
+____________________________
 
-Download        latest         version        of        `django_rocket
-<https://github.com/xando/django_rocket/zipball/master>`_
+Download        latest         version        of        `django-rocket-engine
+<https://github.com/xando/django-rocket-engine/zipball/master>`_
 
 .. code-block:: bash
 
-    $ pip install django_rocket
+    $ pip install django-rocket-engine
 
 
 Register application on Google AppEngine
@@ -82,17 +82,17 @@ one an put yourapplication-id. Example app.yaml:
 
     handlers:
     - url: /.*
-      script: django_rocket.wsgi
+      script: rocket_engine.wsgi
 
 
-django_rocket as every Django application needs to be added to settings.py file in INSTALLED_APPS section:
+django-rocket-engine as every Django application needs to be added to settings.py file in INSTALLED_APPS section:
 
 .. code-block:: python
 
     # settings.py
     INSTALLED_APPS = (
         ...
-        'django_rocket',
+        'rocket-engine',
     )
 
 Very list  bit that  needs to  be done  is to  modify settings  to use
@@ -102,14 +102,14 @@ production. Inside settings.py:
 .. code-block:: python
 
     # settings.py
-    from django_rocket import on_appengine
+    from rocket_engine import on_appengine
 
     ...
 
     if on_appengine:
         DATABASES = {
             'default': {
-                'ENGINE': 'django_rocket.db.backends.cloudsql',
+                'ENGINE': 'rocket_engine.db.backends.cloudsql',
                 'INSTANCE': 'instance:name',
                 'NAME': 'database_name',
             }

@@ -7,7 +7,7 @@ long_description = open('README.rst').read() if os.path.exists('README.rst') els
 
 version = open('VERSION').read() if os.path.exists('VERSION') else ""
 
-setup(name='django_rocket',
+setup(name='django-rocket-engine',
       version=version,
       packages=find_packages(),
       author='Sebastian Pawluś',

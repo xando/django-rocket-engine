@@ -11,7 +11,7 @@ Example requirements.txt for simple project may contains packages like
 .. code-block:: python
  
     django==1.4 
-    django-rocketengine>=0.4
+    django-rocket-engine>=0.4
  
 Those  packages will  be downloaded  and installed  durring deployment
 stage (running manage.py update command), there no need to keep all
@@ -23,7 +23,7 @@ under source  control:
 .. code-block:: python
 
     django==1.4 
-    django-rocketengine>=0.4
+    django-rocket-engine>=0.4
     git+git://github.com/alex/django-taggit.git
     git+git://github.com/jezdez/django-dbtemplates.git@master
 

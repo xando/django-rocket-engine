@@ -12,8 +12,8 @@ from  `All  Buttons  Pressed <http://www.allbuttonspressed.com/projects/djangoap
 
 Documentation:
 ______________
-`http://readthedocs.org/docs/django_rocket/ <http://readthedocs.org/docs/django_rocket/>`_
+`http://readthedocs.org/docs/django-rocket-engine/ <http://readthedocs.org/docs/django-rocket-engine/>`_
 
 Source Code:
 ____________
-`https://github.com/xando/django_rocket <https://github.com/xando/django_rocket/>`_
+`https://github.com/xando/django-rocket-engine <https://github.com/xando/django-rocket-engine/>`_

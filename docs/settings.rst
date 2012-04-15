@@ -5,14 +5,14 @@ Settings
 DATABASES
 ---------
 
-django_rocket comes  with pre-defined backend Google  CloudSQL wrapper
+django-rocket-engine comes  with pre-defined backend Google  CloudSQL wrapper
 which prevents of using your production database during development:
 
 .. code-block:: python
 
     DATABASES = {
         'default': {
-            'ENGINE': 'django_rocket.db.backends.cloudsql',
+            'ENGINE': 'rocket_engine.db.backends.cloudsql',
             'INSTANCE': 'instance:name',
             'NAME': 'database_name',
         }
@@ -24,14 +24,14 @@ helper method which could applied in settings.py:
 .. code-block:: python
 
     # settings.py
-    from django_rocket import on_appengine
+    from rocket_engine import on_appengine
 
     ...
 
     if on_appengine:
         DATABASES = {
             'default': {
-                'ENGINE': 'django_rocket.db.backends.cloudsql',
+                'ENGINE': 'rocket_engine.db.backends.cloudsql',
                 'INSTANCE': 'instance:name',
                 'NAME': 'database_name',
             }
@@ -52,7 +52,7 @@ DEFAULT_FILE_STORAGE
 file backend. To  enable   storage  go   to  `Google   Api  Console
 <https://code.google.com/apis/console>`_::
 
-    DEFAULT_FILE_STORAGE = 'django_rocket.storage.CloudStorage'
+    DEFAULT_FILE_STORAGE = 'rocket_engine.storage.CloudStorage'
 
 APPENGINE_BUCKET
 ----------------
@@ -60,7 +60,7 @@ APPENGINE_BUCKET
 `Google   Cloud  Storage   <https://developers.google.com/storage/>`_
 bucket  name.    To  enable   storage  go   to  `Google   Api  Console
 <https://code.google.com/apis/console>`_.  Settings dedicated  to work
-with 'django_rocket.storage.CloudStorage' as a DEFAULT_FILE_STORAGE.
+with 'rocket_engine.storage.CloudStorage' as a DEFAULT_FILE_STORAGE.
 
 Default::
 
@@ -68,7 +68,7 @@ Default::
 
 Example::
 
-    DEFAULT_FILE_STORAGE = 'django_rocket.storage.CloudStorage'
+    DEFAULT_FILE_STORAGE = 'rocket_engine.storage.CloudStorage'
     APPENGINE_BUCKET = 'my-bucket'
 
 

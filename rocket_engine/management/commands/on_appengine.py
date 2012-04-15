@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 from django.core import management
 from django import db
 
-import django_rocket
+import rocket_engine
 
 
 class Command(BaseCommand):
@@ -23,7 +23,7 @@ class Command(BaseCommand):
         settings._wrapped = Settings(settings_module)
 
     def handle(self, *args, **kwargs):
-        django_rocket.on_appengine = True
+        rocket_engine.on_appengine = True
 
         self.reload_settings()
 
