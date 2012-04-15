@@ -7,50 +7,53 @@ Installation
 Download latest Google AppEngine SDK
 ____________________________________
 
-Get the latest version of SDK from `<http://code.google.com/appengine/downloads.html>`_, unzip it and make it visiable in $PATH variable. 
-
-If you don't know how to add path to $PATH, check your link: 
-`linux <http://www.troubleshooters.com/linux/prepostpath.htm>`_, 
-`mac os <http://keito.me/tutorials/macosx_path>`_,
-`windows <http://www.computerhope.com/issues/ch000549.htm>`_.
+Get `the latest version of SDK <http://code.google.com/appengine/downloads.html>`_, if you are using
+Linux please make sure that SDK will be visible in $PATH variable (`how? <http://www.troubleshooters.com/linux/prepostpath.htm>`_).
 
 Install Django
 ______________
 
-Install    Django    from    Google     AppEngine    SDK.     Go    to
-{GOOGLE_APPENGINE_PATH}/lib/django_1_3/   directory  and   run  python
-setup.py install.   If you are  not using virtualenv,  root privilages
-may be reguired to perform this action.
+Install `Django <https://docs.djangoproject.com>`_ framework. There are
+many  ways  of  doing  that  (suggested  one  is  to  use  
+`virtualenv <http://readthedocs.org/docs/virtualenv/en/latest/>`_ 
+along with 
+`virtualenvwrapper <http://www.doughellmann.com/projects/virtualenvwrapper/>`_ 
+and 
+`pip <http://readthedocs.org/docs/pip/en/latest/>`_)
+
+.. code-block:: bash
+
+    $ pip install django
 
 Create Django project
 _____________________
 
 Create new awsome Django project,  right now even more awesome because
-this project will  use AppEngine. If previous step  ended with success
-you may perform with use of django-admin internal tool::
+this project will  use AppEngine. If previous step  ended with success,
+you may achieve this using django-admin internal tool:
 
-    $ django-admin startproject my-awesome-project
+.. code-block:: bash
+
+    $ django-admin startproject my_awesome_project
+
+
+Install django_rocket
+______________________
+
+Download        latest         version        of        `django_rocket
+<https://github.com/xando/django_rocket/zipball/master>`_
+
+.. code-block:: bash
+
+    $ pip install django_rocket
 
 
 Register application on Google AppEngine
 ________________________________________
 
-`Register   <http://code.google.com/appengine/>`_  your   awesome  new
+`Register   <http://code.google.com/appengine/>`_  your new  awesome
 application on Google  AppEngine site. Unique application indetifier
 will be used also as to access to your project on AppEngine. 
-
-
-Download django_rocket
-______________________
-
-Download        latest         version        of        `django_rocket
-<https://github.com/xando/django_rocket/zipball/master>`_    to   your
-project directory, rename directory to  django_rocket, 
-
-or go into your
-new  project  directory   and  past  this  code  in   to  your shell::
-
-     $ python -c "import urllib,zipfile,os; urllib.urlretrieve('https://github.com/xando/django_rocket/zipball/master', 'django_rocket.zip'); zipfile.ZipFile('django_rocket.zip', 'r').extractall(); os.rename(zipfile.ZipFile('django_rocket.zip', 'r').namelist()[0].strip('/'), 'django_rocket'); os.remove('django_rocket.zip')"
 
 
 Create CloudSQL database

@@ -5,7 +5,10 @@ Settings
 DATABASES
 ---------
 
-django_rocket comes with pre-defined backend Google CloudSQL wrapper which prevents of using your production database during development::
+django_rocket comes  with pre-defined backend Google  CloudSQL wrapper
+which prevents of using your production database during development:
+
+.. code-block:: python
 
     DATABASES = {
         'default': {
@@ -15,7 +18,10 @@ django_rocket comes with pre-defined backend Google CloudSQL wrapper which preve
         }
     }
 
-To distinguish between production and development, library provides helper method which could applied in settings.py::
+To distinguish  between production  and development,  library provides
+helper method which could applied in settings.py:
+
+.. code-block:: python
 
     # settings.py
     from django_rocket import on_appengine
@@ -84,7 +90,7 @@ Default::
 
     APPENGINE_POST_UPDATE = 'appengine_hooks.post_update'
 
-Example appengine_hooks.py::
+Example of appengine_hooks.py file::
 
     from django.core.management import call_command
 
