@@ -93,13 +93,5 @@ if not on_appengine_remote:
 path_appendine_sdk()
 
 
-version = django.get_version().split('.')
-
-if version[1] == '3':
-    from django.core.handlers.wsgi import WSGIHandler
-    wsgi = WSGIHandler()
-
-elif version[1] == '4':
-    from django.core import wsgi as django_wsgi
-    wsgi = django_wsgi.get_wsgi_application()
-
+from django.core.handlers.wsgi import WSGIHandler
+wsgi = WSGIHandler()
