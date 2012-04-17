@@ -162,3 +162,13 @@ and deploy:
     $ python manage.py update
 
 Have fun!
+
+Next Steps
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   requirements
+   commands
+   settings
