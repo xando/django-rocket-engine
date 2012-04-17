@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 import os
 from setuptools import setup, find_packages
+from rocket_engine.utils import get_version
+
 
 description = 'Google AppEngine helper applcaiton'
 long_description = open('README.rst').read() if os.path.exists('README.rst') else ""
 
-version = open('VERSION').read() if os.path.exists('VERSION') else ""
 
 setup(name='django-rocket-engine',
-      version=version,
+      version=get_version(),
       packages=find_packages(),
       author='Sebastian Pawluś',
       author_email='sebastian.pawlus@gmail.com',
