@@ -1,8 +1,9 @@
 import os
 import sys
+import site
 
-import django
-import manage
+from django.core.handlers.wsgi import WSGIHandler
+from django.core import signals
 
 
 on_appengine_remote = os.getenv('SERVER_SOFTWARE','')\
@@ -10,8 +11,12 @@ on_appengine_remote = os.getenv('SERVER_SOFTWARE','')\
 
 on_appengine = on_appengine_remote
 
+try:
+    import manage
+    PROJECT_DIR = os.path.abspath(os.path.dirname(manage.__file__))
+except ImportError:
+    pass
 
-PROJECT_DIR = os.path.abspath(os.path.dirname(manage.__file__))
 
 
 def get_appengine_sdk_path():
@@ -73,12 +78,12 @@ def path_appendine_sdk():
         dev_appserver.FakeFile.NOT_ALLOWED_DIRS = set([])
 
     else:
+
         # loogging exceptions hook
-        from django.core import signals
         from .utils import log_traceback
         signals.got_request_exception.connect(log_traceback)
 
-        import site
+        # add production site
         site.addsitedir(os.path.join(PROJECT_DIR, 'appengine_libs'))
 
 
@@ -87,5 +92,4 @@ if not on_appengine_remote:
 path_appendine_sdk()
 
 
-from django.core.handlers.wsgi import WSGIHandler
 wsgi = WSGIHandler()
