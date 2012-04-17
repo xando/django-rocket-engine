@@ -1,6 +1,29 @@
 Requirements
 ============
 
+Google AppEngine SDK libraries:
+-------------------------------
+
+Google    AppEngine    SDK    comes   with    sets    of    
+`libraries <https://developers.google.com/appengine/docs/python/tools/libraries27>`_. 
+If there is a need to use one of them you should append library in your libraries seduction in app.yaml file. Example how to enable lxml in application.
+
+.. code-block:: yaml
+
+    # app.yaml
+
+    # ...
+
+    libraries:
+    - name: django
+      version: 1.3
+    - name: lxml
+      version: 2.3
+
+
+Python requirements.txt
+-----------------------
+
 To bring AppEngine development to more pythonic status.  Library comes
 with basic  support for  python packaging system,  You can  keep there
 list of  required packages  in requirements.txt  file in  your project
@@ -36,6 +59,3 @@ under source  control:
 
 More   about   using   requirements   file   might   be   read   `here
 <http://www.pip-installer.org/en/latest/requirements.html>`_.
-
-
-
