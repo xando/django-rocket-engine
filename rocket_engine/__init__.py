@@ -58,13 +58,7 @@ def setup_appendine_sdk():
 
 def path_appendine_sdk():
 
-    # TODO custom DjangoProject import Hook
-    # from .utils import ImportHook
-    # sys.meta_path.insert(0, ImportHook())
-
-    from .utils import locate_settings
-    if not os.environ.get('DJANGO_SETTINGS_MODULE', None):
-        os.environ.update({'DJANGO_SETTINGS_MODULE': locate_settings(PROJECT_DIR)})
+    os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
 
     if not on_appengine_remote:
         # add SQLlite to allowed modules
