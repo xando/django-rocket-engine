@@ -1,5 +1,4 @@
 import os
-import re
 import shutil
 import shlex
 import logging
@@ -11,9 +10,7 @@ from django.core.management.base import BaseCommand
 from django.core.urlresolvers import get_callable
 
 from ... import PROJECT_DIR
-
-
-logger = logging.getLogger(__name__)
+from ...utils import get_version
 
 
 PRE_UPDATE_HOOK = getattr(
@@ -35,7 +32,11 @@ class Command(BaseCommand):
     help = 'Calls appcfg.py for the current project.'
     args = '[any options that normally would be applied to appcfg.py]'
 
-    def install_requirements(self, requirements_file):
+    def install_requirements(self):
+        requirements_file = os.path.join(
+            PROJECT_DIR, APPENGINE_REQUIREMENTS_FILE
+        )
+
         virtualenv = os.path.join(PROJECT_DIR, APPENGINE_VIRTUALENV)
         virtualenv_cache = os.path.join(virtualenv, 'cache')
         virtualenv_appengine_libs = os.path.join(virtualenv, 'appengine_libs')
@@ -45,15 +46,38 @@ class Command(BaseCommand):
         if not os.path.exists(virtualenv):
             subprocess.Popen(
                 shlex.split('virtualenv %s --distribute' % virtualenv),
+                stdout=subprocess.PIPE
             ).wait()
+
+        version = get_version()
+
+        if version:
+            django_rocket_engine = 'django-rocket-engine==%s' % version
+        else:
+            django_rocket_engine = 'django-rocket-engine'
 
         subprocess.Popen(
             shlex.split(
-                "%s install --requirement=%s --download-cache=%s --target=%s"
-                % (pip_command, requirements_file,
+                "%s install %s --download-cache=%s --target=%s --no-deps"
+                % (pip_command, django_rocket_engine,
                    virtualenv_cache, virtualenv_appengine_libs)
             ),
+            stdout=subprocess.PIPE
         ).wait()
+
+        requirements_file = os.path.join(
+            PROJECT_DIR, APPENGINE_REQUIREMENTS_FILE
+        )
+
+        if os.path.exists(requirements_file):
+            subprocess.Popen(
+                shlex.split(
+                    "%s install --requirement=%s --download-cache=%s --target=%s"
+                    % (pip_command, requirements_file,
+                       virtualenv_cache, virtualenv_appengine_libs)
+                ),
+            ).wait()
+
 
         shutil.move(
             virtualenv_appengine_libs,
@@ -61,12 +85,7 @@ class Command(BaseCommand):
         )
 
     def prepare_upload(self):
-        requirements_file = os.path.join(
-            PROJECT_DIR, APPENGINE_REQUIREMENTS_FILE
-        )
-
-        if os.path.exists(requirements_file):
-            self.install_requirements(requirements_file)
+        self.install_requirements()
 
 
     def clean_upload(self):
