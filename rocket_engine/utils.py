@@ -5,13 +5,13 @@ from google.appengine.api import logservice
 from google.appengine.runtime import apiproxy_errors
 
 from django.utils.importlib import import_module
-from django.core.exceptions import ImproperlyConfigured
+
 
 class ImportHook(object):
+    #TODO, ipdb, logging
 
     def find_module(self, fullname, path=None):
-        if fullname.startswith('ipdb'): #TODO
-            return self
+        pass
 
     def load_module(self, fullname):
         return import_module(fullname)
@@ -53,11 +53,8 @@ def flush_logs():
     pass
 
 
-def locate_settings(project_dir):
-    for path, dirs, files in os.walk(project_dir):
-        if 'settings.py' in files:
-            return "%s.settings" % os.path.basename(path.strip('./\\'))
-
-    raise ImproperlyConfigured(
-        "Could not find 'settings' module. Make sure that project contains settings.py file or 'DJANGO_SETTINGS_MODULE' is set.")
-
+def get_version():
+    version_file = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), '..', 'VERSION')
+    )
+    return open(version_file).read() if os.path.exists(version_file) else ""
