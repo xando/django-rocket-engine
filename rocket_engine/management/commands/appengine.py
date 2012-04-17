@@ -1,7 +1,6 @@
 import os
 import shutil
 import shlex
-import logging
 import subprocess
 
 from google.appengine.tools import appcfg
