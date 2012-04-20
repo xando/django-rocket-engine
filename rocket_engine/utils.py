@@ -51,10 +51,3 @@ def flush_logs():
     logservice.flush()
   except apiproxy_errors.CancelledError:
     pass
-
-
-def get_version():
-    version_file = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), '..', 'VERSION')
-    )
-    return open(version_file).read() if os.path.exists(version_file) else ""
