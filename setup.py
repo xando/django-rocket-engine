@@ -1,20 +1,25 @@
 # -*- coding: utf-8 -*-
 import os
 from setuptools import setup, find_packages
-from rocket_engine.utils import get_version
 
+short_description = 'Google AppEngine helper applcaiton'
 
-description = 'Google AppEngine helper applcaiton'
-long_description = open('README.rst').read() if os.path.exists('README.rst') else ""
+long_description = open(
+    os.path.join(os.path.dirname(__file__), 'README.rst')
+).read()
+
+version = open(
+    os.path.join(os.path.dirname(__file__), 'VERSION')
+).read()
 
 
 setup(name='django-rocket-engine',
-      version=get_version(),
+      version=version,
       packages=find_packages(),
       author='Sebastian Pawluś',
       author_email='sebastian.pawlus@gmail.com',
-      url='http://readthedocs.org/docs/django-rocket/',
-      description=description,
+      url='http://readthedocs.org/projects/django-rocket-engine/',
+      description=short_description,
       long_description=long_description,
       install_requires=[
           'virtualenv>=1.7.1.2',
