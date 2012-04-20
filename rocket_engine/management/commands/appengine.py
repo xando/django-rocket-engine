@@ -9,8 +9,6 @@ from django.core.management.base import BaseCommand
 from django.core.urlresolvers import get_callable
 
 from ... import PROJECT_DIR
-from ...utils import get_version
-
 
 PRE_UPDATE_HOOK = getattr(
     settings, 'APPENGINE_PRE_UPDATE', 'appengine_hooks.pre_update'
@@ -25,6 +23,25 @@ APPENGINE_REQUIREMENTS_FILE = getattr(
     settings, 'APPENGINE_REQUIREMENTS_FILE', 'requirements.txt'
 )
 
+
+requirements_file = os.path.join(
+    PROJECT_DIR, APPENGINE_REQUIREMENTS_FILE
+)
+
+virtualenv = os.path.join(PROJECT_DIR, APPENGINE_VIRTUALENV)
+virtualenv_cache = os.path.join(virtualenv, 'cache')
+virtualenv_appengine_libs = os.path.join(virtualenv, 'appengine_libs')
+
+rocket_engine_path = os.path.abspath(
+    os.path.join(__file__, '../../../')
+)
+
+appengine_libs = os.path.join(PROJECT_DIR, 'appengine_libs')
+appengine_rocket_engine = os.path.join(PROJECT_DIR, 'rocket_engine')
+
+pip_command = os.path.join(virtualenv, 'bin', 'pip')
+
+
 class Command(BaseCommand):
     """Wrapper for appcfg.py with pre-update and post-update hooks"""
 
@@ -32,40 +49,18 @@ class Command(BaseCommand):
     args = '[any options that normally would be applied to appcfg.py]'
 
     def install_requirements(self):
-        requirements_file = os.path.join(
-            PROJECT_DIR, APPENGINE_REQUIREMENTS_FILE
-        )
-
-        virtualenv = os.path.join(PROJECT_DIR, APPENGINE_VIRTUALENV)
-        virtualenv_cache = os.path.join(virtualenv, 'cache')
-        virtualenv_appengine_libs = os.path.join(virtualenv, 'appengine_libs')
-
-        pip_command = os.path.join(virtualenv, 'bin', 'pip')
 
         if not os.path.exists(virtualenv):
             subprocess.Popen(
                 shlex.split('virtualenv %s --distribute' % virtualenv),
-                stdout=subprocess.PIPE
             ).wait()
 
-        version = get_version()
+        if not os.path.exists(virtualenv_appengine_libs):
+            os.mkdir(virtualenv_appengine_libs)
 
-        if version:
-            django_rocket_engine = 'django-rocket-engine==%s' % version
-        else:
-            django_rocket_engine = 'django-rocket-engine'
-
-        subprocess.Popen(
-            shlex.split(
-                "%s install %s --download-cache=%s --target=%s --no-deps"
-                % (pip_command, django_rocket_engine,
-                   virtualenv_cache, virtualenv_appengine_libs)
-            ),
-            stdout=subprocess.PIPE
-        ).wait()
-
-        requirements_file = os.path.join(
-            PROJECT_DIR, APPENGINE_REQUIREMENTS_FILE
+        shutil.copytree(
+            rocket_engine_path,
+            os.path.join(PROJECT_DIR, 'rocket_engine')
         )
 
         if os.path.exists(requirements_file):
@@ -83,22 +78,23 @@ class Command(BaseCommand):
             PROJECT_DIR
         )
 
+
     def prepare_upload(self):
         self.install_requirements()
 
 
     def clean_upload(self):
-        virtualenv = os.path.join(PROJECT_DIR, APPENGINE_VIRTUALENV)
-        virtualenv_appengine_libs = os.path.join(virtualenv, 'appengine_libs')
-        appengine_libs = os.path.join(PROJECT_DIR, 'appengine_libs')
-        try:
-            shutil.rmtree(virtualenv_appengine_libs)
-        except OSError:
-            pass
-        try:
-            shutil.rmtree(appengine_libs)
-        except OSError:
-            pass
+        dirs_do_delete = [
+            appengine_rocket_engine,
+            appengine_libs,
+            virtualenv_appengine_libs
+        ]
+
+        for path in dirs_do_delete:
+            try:
+                shutil.rmtree(path)
+            except OSError:
+                pass
 
     def update(self, argv):
         self.clean_upload()
