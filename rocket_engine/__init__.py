@@ -1,7 +1,7 @@
 import os
 import sys
 import site
-import manage
+
 
 from django.core.handlers.wsgi import WSGIHandler
 from django.core import signals
@@ -10,8 +10,9 @@ on_appengine_remote = os.getenv('SERVER_SOFTWARE','')\
                         .startswith('Google App Engine')
 
 on_appengine = on_appengine_remote
+os.path.abspath(os.curdir)
 
-PROJECT_DIR = os.path.abspath(os.path.dirname(manage.__file__))
+PROJECT_DIR = os.path.abspath(os.getcwd())
 
 
 def get_appengine_sdk_path():
