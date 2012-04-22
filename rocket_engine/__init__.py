@@ -70,9 +70,10 @@ def path_appendine_sdk():
         dev_appserver.HardenedModulesHook._MODULE_OVERRIDES['os'] = os.__dict__
         dev_appserver.HardenedModulesHook._PY27_ALLOWED_MODULES.append('os')
         dev_appserver.HardenedModulesHook._HardenedModulesHook__PY27_OPTIONAL_ALLOWED_MODULES = {}
-
         dev_appserver.FakeFile.NOT_ALLOWED_DIRS = set([])
-
+        dev_appserver.FakeFile.IsFileAccessible = staticmethod(
+            lambda *args, **kwargs: True
+        )
     else:
 
         # loogging exceptions hook
