@@ -1,6 +1,5 @@
 import os
 import sys
-import site
 
 
 from django.core.handlers.wsgi import WSGIHandler
@@ -81,6 +80,7 @@ def path_appendine_sdk():
         signals.got_request_exception.connect(log_traceback)
 
         # add production site
+        import site
         site.addsitedir(os.path.join(PROJECT_DIR, 'appengine_libs'))
 
 
