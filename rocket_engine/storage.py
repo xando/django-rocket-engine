@@ -5,7 +5,7 @@ from google.appengine.ext import blobstore
 from google.appengine.api import files
 import urllib
 
-class BlobstoreStorage(Storage):
+class BlobStorage(Storage):
 
     def save(self, name, content):
         file_name = files.blobstore.create(

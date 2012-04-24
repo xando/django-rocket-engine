@@ -23,6 +23,7 @@ Contents
 
    installation
    requirements
+   blobstorage
    commands
    settings
 

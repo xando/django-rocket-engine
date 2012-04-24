@@ -48,29 +48,9 @@ helper method which could applied in settings.py:
 DEFAULT_FILE_STORAGE
 --------------------
 
-`Google Cloud Storage <https://developers.google.com/storage/>`_
-file backend. To enable storage go to `Google Api Console
-<https://code.google.com/apis/console>`_::
+Use this setting to setup Blob objects as a default project storage.
 
-    DEFAULT_FILE_STORAGE = 'rocket_engine.storage.CloudStorage'
-
-APPENGINE_BUCKET
-----------------
-
-`Google Cloud Storage <https://developers.google.com/storage/>`_
-bucket name. To enable storage go to `Google Api Console
-<https://code.google.com/apis/console>`_. Settings dedicated to work
-with 'rocket_engine.storage.CloudStorage' as a DEFAULT_FILE_STORAGE.
-
-Default::
-
-    APPENGINE_BUCKET = None
-
-Example::
-
-    DEFAULT_FILE_STORAGE = 'rocket_engine.storage.CloudStorage'
-    APPENGINE_BUCKET = 'my-bucket'
-
+    DEFAULT_FILE_STORAGE = 'rocket_engine.storage.BlobStorage'
 
 APPENGINE_PRE_UPDATE
 --------------------

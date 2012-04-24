@@ -167,4 +167,5 @@ Next Steps
 
    requirements
    commands
+   blobstorage
    settings
