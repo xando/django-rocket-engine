@@ -6,8 +6,8 @@ To enable Blob Storage system as a Django storage. Modify your code with element
 .. code-block:: python
 
     # urls.py
-        urlpatterns = patterns(
-       ...
+    urlpatterns = patterns(
+        ...
         url(r'^media/(?P<blobstore_key>.*)/$','rocket_engine.views.file_serve'),
     )
 
