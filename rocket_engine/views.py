@@ -5,7 +5,7 @@ from google.appengine.ext import blobstore
 from google.appengine.ext.blobstore import BLOB_KEY_HEADER
 
 
-def blobstore_serve(request, blobstore_key):
+def file_serve(request, blobstore_key):
 
   blobstore_key = str(urllib.unquote(blobstore_key))
   blob_info = blobstore.BlobInfo.get(blobstore_key)
@@ -15,8 +15,9 @@ def blobstore_serve(request, blobstore_key):
 
   response = HttpResponse(content_type=content_type)
   response[BLOB_KEY_HEADER] = blobstore_key
+
   response['Content-Disposition'] = smart_str(
-    u'attachment; filename=%s' % filename
+    u'attachment; filename=%s' % filename.split('/')[-1]
   )
 
   return response

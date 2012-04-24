@@ -32,4 +32,7 @@ class BlobstoreStorage(Storage):
         return blob_info.size
 
     def url(self, blobstore_key):
-        return reverse('serve', kwargs={'blobstore_key': blobstore_key})
+        return reverse(
+            'rocket_engine.views.file_serve',
+            kwargs={'blobstore_key': blobstore_key}
+        )
