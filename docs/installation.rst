@@ -8,7 +8,7 @@ Download latest Google AppEngine SDK
 ____________________________________
 
 Get `the latest version of SDK <http://code.google.com/appengine/downloads.html>`_, if you are using
-Linux please make sure that SDK is available on your PATH `how? <http://www.troubleshooters.com/linux/prepostpath.htm>`_).
+Linux please make sure that SDK is available on your PATH (`how? <http://www.troubleshooters.com/linux/prepostpath.htm>`_).
 
 Install Django
 ______________
@@ -52,30 +52,25 @@ Install latest version of `django-rocket-engine
 Register application on Google AppEngine
 ________________________________________
 
-`Register <http://code.google.com/appengine/>`_ your new awesome
-application on Google AppEngine site. Unique application identifier
-will be used to allow access to your project on AppEngine.
+`Register <http://code.google.com/appengine/>`_ new application on Google AppEngine site. 
 
 
 Create CloudSQL database
 ________________________
 
-Create a CloudSQL database instance using `Google Api Console
-<https://code.google.com/apis/console>`_, create a database inside
-your CloudSQL instance.
+Create a CloudSQL database instance using `Google Api Console <https://code.google.com/apis/console>`_, create a database inside your CloudSQL instance. Last step is  to add instance name from prevoius step in "Authorized applications". 
 
 
 Configuration
 _____________
 
-Google AppEngine requires applications to have an app.yaml, with
-basic description how to manage application after deployment. Create
-one an put yourapplication-id. Example app.yaml:
+Google AppEngine requires applications to have an config in app.yaml file, which is responsible for basic description, how to manage application. 
+Create app.yaml inside project directory. Example app.yaml for project.
 
 .. code-block:: yaml
 
     # app.yaml
-    application: appengine_appspot_id
+    application: unique_appengine_appspot_id
     version: 1
     runtime: python27
     api_version: 1
@@ -90,16 +85,6 @@ one an put yourapplication-id. Example app.yaml:
       version: 1.3
 
 
-django-rocket-engine as every Django application needs to be added to settings.py file in INSTALLED_APPS section:
-
-.. code-block:: python
-
-    # settings.py
-    INSTALLED_APPS = (
-        ...
-        'rocket_engine',
-    )
-
 Very list bit that needs to be done is to modify settings. Things that
 need to be done are presented in code snippet bellow:
 
@@ -110,11 +95,20 @@ need to be done are presented in code snippet bellow:
 
     ...
 
+    # django-rocket-engine as every Django application 
+    # needs to be added to settings.py file in INSTALLED_APPS section:
+    INSTALLED_APPS = (
+        # other django applications here
+	# ...
+	
+        'rocket_engine',
+    )
+    
+
     # remove project name from ROOT_URLCONF.
     # AppEngine doesn't treat project as a module
     # like normal Django application does.  
     ROOT_URLCONF = 'urls'
-
 
     # to use different databases  during    
     # development process and on production. 
@@ -139,13 +133,10 @@ need to be done are presented in code snippet bellow:
 
 
 .. note::
-   Instead  of  using  sqlite3  backend   your  are  able  to  use  MySQL
-   backend.   This    should   be   also   your    choice   for   serious
-   application.  MySQL  is also  suggested  by  Google as  a  development
-   database for AppEngine CloudSQL applications.
+   Instead of using sqlite3 backend your are able to use MySQL backend. This should be also your choice for serious applications.
 
 
-This is just about it, application is ready to run deploy:
+This is just about it, application is ready to run:
 
 .. code-block:: bash
 

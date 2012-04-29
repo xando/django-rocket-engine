@@ -1,19 +1,22 @@
 .. image:: logo.png
 
-Welcome to Django Rocket Engine, Django on AppEngine project documentation.
+Welcome to django-rocket-engine, Django on AppEngine project documentation.
 
-Motivation to create this project was the publication by Google of the CloudSQL
-backend. This library as-is is not for production ready yet, the same as Google
-AppEngine CloudSQL itself is not yet ready for production and is currently in
-development preview.
+Project  is a  helper library  with main  goal to  help setup  "correct" (in subjective meaning) Django development environment for Google AppEngine services.
 
-This project was originally inspired by the work of Waldemar Kornewald and Thomas Wanschik
-from `All Buttons Pressed <http://www.allbuttonspressed.com/>`_, some ideas where moved from
-`djangoappengine
-<http://www.allbuttonspressed.com/projects/djangoappengine>`_ project.
+Supports:
 
-The project is still in an experimental stage, source code can be found on `github
-<https://github.com/xando/django-rocket-engine>`_.
+  * basic support for pip style requirements,
+  * support for virtualenv environments,
+  * pre/post deployment hooks,
+  * seamless BlobStorage backend.
+
+
+The project is still in an experimental stage, being more like prof-of-concept.
+Source code can be found on `github <https://github.com/xando/django-rocket-engine>`_.
+
+This project was inspired by the work of Waldemar Kornewald and Thomas Wanschik
+from `All Buttons Pressed <http://www.allbuttonspressed.com/>`_, some ideas where moved from `djangoappengine <http://www.allbuttonspressed.com/projects/djangoappengine>`_ project.
 
 Contents
 --------
