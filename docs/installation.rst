@@ -84,6 +84,8 @@ Create app.yaml inside project directory. Example app.yaml for project.
     - name: django
       version: 1.3
 
+    env_variables:
+      DJANGO_SETTINGS_MODULE: 'settings'
 
 Very list bit that needs to be done is to modify settings. Things that
 need to be done are presented in code snippet bellow:
