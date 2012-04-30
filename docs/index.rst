@@ -18,6 +18,8 @@ Source code can be found on `github <https://github.com/xando/django-rocket-engi
 This project was inspired by the work of Waldemar Kornewald and Thomas Wanschik
 from `All Buttons Pressed <http://www.allbuttonspressed.com/>`_, some ideas where moved from `djangoappengine <http://www.allbuttonspressed.com/projects/djangoappengine>`_ project.
 
+`Example application <https://github.com/xando/rocket-project>`_
+
 Contents
 --------
 
