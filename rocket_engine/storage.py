@@ -3,7 +3,7 @@ from django.core.files.storage import Storage
 
 from google.appengine.ext import blobstore
 from google.appengine.api import files
-import urllib
+
 
 class BlobStorage(Storage):
 
@@ -22,14 +22,6 @@ class BlobStorage(Storage):
         blobstore_info = blobstore.BlobInfo.get(blobstore_key)
         blobstore_file.name = blobstore_info.filename.split('/')[-1]
         return blobstore_file
-
-    def exists(self, blobstore_key):
-        return True if blobstore.BlobInfo.get(blobstore_key) else False
-
-    def size(self, blobstore_key):
-        blobstore_key = str(urllib.unquote(blobstore_key))
-        blob_info = blobstore.BlobInfo.get(blobstore_key)
-        return blob_info.size
 
     def url(self, blobstore_key):
         return reverse(
