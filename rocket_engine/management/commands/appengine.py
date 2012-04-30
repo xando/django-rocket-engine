@@ -40,6 +40,7 @@ appengine_libs = os.path.join(PROJECT_DIR, 'appengine_libs')
 appengine_rocket_engine = os.path.join(PROJECT_DIR, 'rocket_engine')
 
 pip_command = os.path.join(virtualenv, 'bin', 'pip')
+python_command = os.path.join(virtualenv, 'bin', 'python')
 
 
 class Command(BaseCommand):
@@ -66,8 +67,8 @@ class Command(BaseCommand):
         if os.path.exists(requirements_file):
             subprocess.Popen(
                 shlex.split(
-                    "%s install --requirement=%s --download-cache=%s --target=%s"
-                    % (pip_command, requirements_file,
+                    "%s %s install --requirement=%s --download-cache=%s --target=%s"
+                    % (python_command, pip_command, requirements_file,
                        virtualenv_cache, virtualenv_appengine_libs)
                 ),
             ).wait()
