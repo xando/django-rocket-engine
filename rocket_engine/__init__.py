@@ -58,7 +58,8 @@ def setup_appendine_sdk():
 
 def path_appendine_sdk():
 
-    os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
+    if not os.environ.get('DJANGO_SETTINGS_MODULE'):
+        os.environ.update({'DJANGO_SETTINGS_MODULE': 'settings'})
 
     if not on_appengine_remote:
         # add SQLlite to allowed modules
