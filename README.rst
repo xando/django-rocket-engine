@@ -18,6 +18,6 @@ Source Code:
 ____________
 `https://github.com/xando/django-rocket-engine <https://github.com/xando/django-rocket-engine/>`_
 
-Example application
-___________________
+Example application:
+____________________
 `https://github.com/xando/rocket-project <https://github.com/xando/rocket-project>`_
