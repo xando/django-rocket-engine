@@ -52,13 +52,17 @@ Install latest version of `django-rocket-engine
 Register application on Google AppEngine
 ________________________________________
 
-`Register <http://code.google.com/appengine/>`_ new application on Google AppEngine site. 
+`Register <http://appengine.google.com>`_ new application on Google AppEngine site. 
 
 
 Create CloudSQL database
 ________________________
 
-Create a CloudSQL database instance using `Google Api Console <https://code.google.com/apis/console>`_, create a database inside your CloudSQL instance. Last step is  to add instance name from prevoius step in "Authorized applications". 
+Create a CloudSQL database instance using `Google Api Console <https://code.google.com/apis/console>`_, add application instance name from prevoius step in "Authorized applications". Using "SQL Prompt" tab create a database inside your CloudSQL instance. 
+
+.. code-block:: sql
+
+   CREATE DATABASE database_name;
 
 
 Configuration
@@ -142,13 +146,15 @@ This is just about it, application is ready to run:
 
 .. code-block:: bash
 
+    $ python manage.py syncdb
     $ python manage.py runserver
 
 and deploy:
 
 .. code-block:: bash
 
-    $ python manage.py update
+    $ python manage.py on_appengine syncdb
+    $ python manage.py appengine update --oauth2
 
 Have fun!
 
