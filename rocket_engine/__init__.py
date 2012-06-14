@@ -64,8 +64,10 @@ def path_appendine_sdk():
     if not on_appengine_remote:
         # add SQLlite to allowed modules
         from google.appengine.tools import dev_appserver
+        from google.appengine import dist27
+        dist27.MODULE_OVERRIDES = []
         dev_appserver.HardenedModulesHook._WHITE_LIST_C_MODULES.extend(
-            ('parser', '_ssl', '_io', '_sqlite3', 'os', '_os'))
+            ('parser', '_ssl', '_io', '_sqlite3', 'os', '_os', 'tempfile'))
 
         dev_appserver.HardenedModulesHook._MODULE_OVERRIDES['os'] = os.__dict__
         dev_appserver.HardenedModulesHook._PY27_ALLOWED_MODULES.append('os')
@@ -88,6 +90,5 @@ def path_appendine_sdk():
 if not on_appengine_remote:
     setup_appendine_sdk()
 path_appendine_sdk()
-
 
 wsgi = WSGIHandler()

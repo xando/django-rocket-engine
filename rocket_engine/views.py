@@ -5,19 +5,21 @@ from google.appengine.ext import blobstore
 from google.appengine.ext.blobstore import BLOB_KEY_HEADER
 
 
-def file_serve(request, blobstore_key):
+def file_serve(request, filename):
 
-  blobstore_key = str(urllib.unquote(blobstore_key))
-  blob_info = blobstore.BlobInfo.get(blobstore_key)
+    blobinfo = blobstore.BlobInfo.all().filter('filename =', filename)
+    blobstore_key = blobinfo[0].key()._BlobKey__blob_key
 
-  filename = getattr(blob_info, 'filename', blobstore_key)
-  content_type = getattr(blob_info, 'content_type', 'application/octet-stream')
+    blob_info = blobstore.BlobInfo.get(blobstore_key)
 
-  response = HttpResponse(content_type=content_type)
-  response[BLOB_KEY_HEADER] = blobstore_key
+    filename = getattr(blob_info, 'filename', blobstore_key)
+    content_type = getattr(blob_info, 'content_type', 'application/octet-stream')
 
-  response['Content-Disposition'] = smart_str(
-    u'attachment; filename=%s' % filename.split('/')[-1]
-  )
+    response = HttpResponse(content_type=content_type)
+    response[BLOB_KEY_HEADER] = blobstore_key
 
-  return response
+    response['Content-Disposition'] = smart_str(
+        u'attachment; filename=%s' % filename.split('/')[-1]
+    )
+
+    return response
