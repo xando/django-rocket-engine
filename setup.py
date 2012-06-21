@@ -2,7 +2,7 @@
 import os
 from setuptools import setup, find_packages
 
-short_description = 'Google AppEngine helper applcaiton'
+short_description = 'Django on Google AppEngine'
 
 long_description = open(
     os.path.join(os.path.dirname(__file__), 'README.rst')
