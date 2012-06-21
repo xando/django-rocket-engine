@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 import shlex
 import subprocess
@@ -52,9 +53,13 @@ class Command(BaseCommand):
     def install_requirements(self):
 
         if not os.path.exists(virtualenv):
+            print "\nCreating environment, ...",
+            sys.stdout.flush()
             subprocess.Popen(
                 shlex.split('virtualenv %s --distribute' % virtualenv),
+                stdout=subprocess.PIPE
             ).wait()
+            print "done.\n"
 
         if not os.path.exists(virtualenv_appengine_libs):
             os.mkdir(virtualenv_appengine_libs)
@@ -65,13 +70,17 @@ class Command(BaseCommand):
         )
 
         if os.path.exists(requirements_file):
+            print "\nPreparing requirements, ...",
+            sys.stdout.flush()
             subprocess.Popen(
                 shlex.split(
                     "%s %s install --requirement=%s --download-cache=%s --target=%s"
                     % (python_command, pip_command, requirements_file,
                        virtualenv_cache, virtualenv_appengine_libs)
                 ),
+                stdout=subprocess.PIPE
             ).wait()
+            print "done.\n"
 
 
         shutil.move(
