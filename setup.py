@@ -34,5 +34,6 @@ setup(name='django-rocket-engine',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Framework :: Django',
-    ],
+      ],
+      test_suite='tests.runtests.runtests'
 )

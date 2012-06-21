@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.core.files.storage import Storage
+from django.utils.encoding import force_unicode
 
 from google.appengine.ext import blobstore
 from google.appengine.api import files
@@ -18,7 +19,7 @@ class BlobStorage(Storage):
             f.write(content.read())
 
         files.finalize(file_name)
-        return name
+        return force_unicode(name.replace('\\', '/'))
 
     def _open(self, filename, mode='rb'):
         blobinfo = blobstore.BlobInfo.all().filter('filename =', filename)
@@ -31,8 +32,12 @@ class BlobStorage(Storage):
 
         return blobstore_file
 
-    def get_available_name(self, name):
-        return name
+    def exists(self, name):
+        blobinfo = blobstore.BlobInfo.all().filter('filename =', name)
+
+        if blobinfo.count():
+            return True
+        return False
 
     def url(self, filename):
         return reverse(
