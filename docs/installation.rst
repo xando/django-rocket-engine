@@ -14,7 +14,7 @@ Install Django
 ______________
 
 Install `Django <https://docs.djangoproject.com>`_ framework. There are many
-ways of doing that (suggested one is to use `virtualenv
+ways of doing that (suggestion is to use `virtualenv
 <http://readthedocs.org/docs/virtualenv/en/latest/>`_ along with
 `virtualenvwrapper <http://www.doughellmann.com/projects/virtualenvwrapper/>`_
 and `pip <http://readthedocs.org/docs/pip/en/latest/>`_)
@@ -30,12 +30,12 @@ and `pip <http://readthedocs.org/docs/pip/en/latest/>`_)
 Create Django project
 _____________________
 
-Create new, awesome Django project, right now even more awesome because
+Create a new, awesome Django project. Right now it's even more awesome because
 this project will use AppEngine:
 
 .. code-block:: bash
 
-    $ django-admin startproject my_awesome_project
+    $ django-admin.py startproject my_awesome_project
 
 
 Install django-rocket-engine
@@ -58,7 +58,7 @@ ________________________________________
 Create CloudSQL database
 ________________________
 
-Create a CloudSQL database instance using `Google Api Console <https://code.google.com/apis/console>`_, add application instance name from prevoius step in "Authorized applications". Using "SQL Prompt" tab create a database inside your CloudSQL instance. 
+Create a CloudSQL database instance using `Google Api Console <https://code.google.com/apis/console>`_, add application instance name from previous step in "Authorized applications". Using "SQL Prompt" tab create a database inside your CloudSQL instance. 
 
 .. code-block:: sql
 
@@ -68,8 +68,8 @@ Create a CloudSQL database instance using `Google Api Console <https://code.goog
 Configuration
 _____________
 
-Google AppEngine requires applications to have an config in app.yaml file, which is responsible for basic description, how to manage application. 
-Create app.yaml inside project directory. Example app.yaml for project.
+Google AppEngine requires applications to have an config in app.yaml file, which is responsible for basic description, and how to manage the application. 
+Create app.yaml inside project directory. Example of app.yaml for project.
 
 .. code-block:: yaml
 
@@ -91,8 +91,7 @@ Create app.yaml inside project directory. Example app.yaml for project.
     env_variables:
       DJANGO_SETTINGS_MODULE: 'settings'
 
-Very list bit that needs to be done is to modify settings. Things that
-need to be done are presented in code snippet bellow:
+Things that need to be done in settings.py are presented in code snippet below:
 
 .. code-block:: python
 
@@ -139,10 +138,10 @@ need to be done are presented in code snippet bellow:
 
 
 .. note::
-   Instead of using sqlite3 backend your are able to use MySQL backend. This should be also your choice for serious applications.
+   Instead of using sqlite3 backend your are able to use MySQL backend. This should also be your choice for serious applications.
 
 
-This is just about it, application is ready to run:
+That's just about it. Application is ready to run:
 
 .. code-block:: bash
 

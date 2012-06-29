@@ -1,8 +1,8 @@
 .. image:: logo.png
 
-Welcome to django-rocket-engine, Django on AppEngine project documentation.
+Welcome to the documentation for django-rocket-engine - Django on AppEngine
 
-Project  is a  helper library  with main  goal to  help setup  "correct" (in subjective meaning) Django development environment for Google AppEngine services.
+Project  is a  helper library  with main  goal to  help setup  "correct" Django development environment for Google AppEngine services.
 
 Supports:
 
@@ -12,7 +12,7 @@ Supports:
   * seamless BlobStorage backend.
 
 
-The project is still in an experimental stage, being more like prof-of-concept.
+The project is still in the experimental stage, being more like proof-of-concept.
 Source code can be found on `github <https://github.com/xando/django-rocket-engine>`_.
 
 This project was inspired by the work of Waldemar Kornewald and Thomas Wanschik

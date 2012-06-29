@@ -28,10 +28,10 @@ To perform an operation on Google AppEngine from your local machine use::
     python manage.py on_appengine syncdb
 
 This command will perform a sycndb operation on your remote instance. Google
-AppEngine doesn't come with any remote access mechanism (like SSH, Talent),
-this command helps to overcome this inconvenience. Any command called this way
-will be called with use of remote storage instead of your local one. This
-command affects only storage. Other useful examples might be.
+AppEngine doesn't come with any kind of remote access mechanism (like SSH, Talent),
+this command helps to overcome this inconvenience. Any command invoked this way
+will be called to use of remote storage instead of your local one. This
+command only affects storage. Other useful examples might be.
 
 * remote python shell::
 

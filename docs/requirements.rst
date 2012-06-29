@@ -5,7 +5,7 @@ Google AppEngine SDK libraries:
 -------------------------------
 
 Google AppEngine SDK comes with sets of `libraries <https://developers.google.com/appengine/docs/python/tools/libraries27>`_.
-If there is a need to use one of them, you should append library in your libraries seduction in app.yaml file rather to add them with use of requirements.txt file (explained bellow). Example how to enable lxml in application.
+If there is a need to use one of them, you should append the library in your libraries seduction in app.yaml file rather to add them with use of requirements.txt file (explained below). Example of how to enable lxml in application.
 
 .. code-block:: yaml
 
@@ -23,9 +23,9 @@ If there is a need to use one of them, you should append library in your librari
 Python requirements.txt
 -----------------------
 
-To bring AppEngine development to more pythonic status. Library comes with
+To bring AppEngine development to more pythonic status. The library comes with
 basic support for python packaging system, You can keep list of required
-packages in requirements.txt file in your project root directory.  Example
+packages in requirements.txt file in your project root directory.  Example of
 requirements.txt for simple project may contains packages like:
 
 .. code-block:: python
@@ -33,8 +33,8 @@ requirements.txt for simple project may contains packages like:
     django-tastypie
     django-taggit>=0.4
 
-Those packages will be downloaded and installed during deployment stage
-(manage.py appengine update).Requirements file may also contain references to packages being under source control:
+These packages will be downloaded and installed during deployment stage
+(manage.py appengine update). Requirements file may also contain references to packages being under source control:
 
 .. code-block:: python
 

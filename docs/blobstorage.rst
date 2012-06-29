@@ -1,7 +1,7 @@
 Blob Storage
 ============
 
-To enable BlobStorage system as a Django storage. Modify your code with elements presented bellow.
+To enable BlobStorage system as a Django storage, modify your code with elements presented below.
 
 .. code-block:: python
 

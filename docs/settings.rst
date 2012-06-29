@@ -6,7 +6,7 @@ DATABASES
 ---------
 
 django-rocket-engine comes with pre-defined backend Google CloudSQL wrapper
-which prevents of using your production database during development:
+which prevents using your production database during development:
 
 .. code-block:: python
 
@@ -18,7 +18,7 @@ which prevents of using your production database during development:
         }
     }
 
-To distinguish between production and development, library provides
+To distinguish between production and development. The library provides
 helper method which could applied in settings.py:
 
 .. code-block:: python
